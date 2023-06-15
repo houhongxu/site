@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "hhxpress dev site",
+    "build": "hhxpress build site",
+    "preview": "hhxpress preview site"
+  },
+  "dependencies": {
+    "hhxpress": "^0.1.16"
+  }
+}

@@ -1,0 +1,26 @@
+# 文本的样式处理
+
+## 省略号
+
+```css
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+```
+
+例如：
+
+文本：本文就将深入探讨下流体特性和 BFC 特性下的两栏自适应布局
+
+元素：
+
+<div
+  style={{
+    width: '200px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  }}
+>
+  本文就将深入探讨下流体特性和BFC特性下的两栏自适应布局
+</div>
