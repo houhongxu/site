@@ -8,7 +8,7 @@ export default defineConfig({
       items: [
         { text: '主页', link: '/' },
         { text: '笔记', link: '/note/intro' },
-        { text: '面试题', link: '/interview/intro' },
+        { text: '面试题', link: '/interview/0介绍/intro' },
       ],
     },
   },
