@@ -5,6 +5,6 @@
     "preview": "hhxpress preview site"
   },
   "dependencies": {
-    "hhxpress": "^0.1.38"
+    "hhxpress": "^0.1.39"
   }
 }
