@@ -1,0 +1,36 @@
+# 防盗链\*
+
+## Referer 请求头
+
+请求页面的来源地址
+
+服务器通过 referer 记录的来源来判断是否是内部域名
+
+例如：![](https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png)
+但是可以直接复制链接打开`https://i0.hdslb.com/bfs/banner/728f45f115c9b99752bb162664600a183b23c8da.png`
+
+因为直接访问没有 Referer 请求头
+
+## Referrer-Policy 响应头
+
+监管哪些访问来源地址会在 Referer 中发送
+
+### 防防盗链
+
+需要给网站服务器整体配置，这样网站发起的请求都不会携带 referer 请求头
+
+![7-1](/img/interview/2/7-1.jpg)
+
+### HTML
+
+也可以放 html 中，`<>`等也可单独配置，[详见](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Referrer-Policy)
+
+```html
+<meta name="referrer" content="no-referrer" />
+```
+
+## 应用场景
+
+- 防盗链
+
+- 统计

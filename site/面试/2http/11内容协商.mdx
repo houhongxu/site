@@ -1,0 +1,28 @@
+# 内容协商\*
+
+浏览器与服务器协商资源类型，比如中英文版本、压缩编码方式等，如果没有返回状态码 406 Not Acceptable
+
+## 请求头
+
+- `Accept`：比如 json 或者 html
+- `Accept-Language`：请求版本，比如中英文版切换
+- `Accept-Encoding`：请求压缩编码方式，比如 gzip 与 brotil(br)，解压工作是浏览器做的，浏览器支持的压缩编码会传给服务器
+
+例如：
+
+```bash
+Accept: text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8
+```
+
+> q 是权重，内容以逗号分隔，而不是分号
+
+## 反爬
+
+仅浏览器中会自动发送 `Accept`、`Accept-Encoding` 、 `Accept-Language` 请求头
+服务器配置如果不存在这三个请求头，则拒绝请求
+
+## 应用场景
+
+- i18n
+
+- 中英文版本切换

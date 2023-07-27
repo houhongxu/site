@@ -1,0 +1,22 @@
+# 文本的样式处理
+
+## 省略号
+
+### 单行
+
+```css
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+```
+
+### 多行
+
+仅支持 webkit 内核的浏览器，小程序用比较合适
+
+```css
+overflow: hidden;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+```
