@@ -1,4 +1,4 @@
-# reset 的本质
+# reset
 
 ## reset 的本质：移动 HEAD 以及它所指向的 branch
 

@@ -1,0 +1,49 @@
+# useMemoizedFn 与 useLatest
+
+- useMemoizedFn： 理论上可以替换 useCallback
+- useLatest
+
+可以解决 闭包陷阱 问题，其实我感觉仅仅是 闭包特性
+
+```ts
+type noop = (this: any, ...args: any[]) => any
+
+type PickFunction<T extends noop> = (
+  this: ThisParameterType<T>,
+  ...args: Parameters<T>
+) => ReturnType<T>
+
+function useMemoizedFn<T extends noop>(fn: T) {
+  if (isDev) {
+    if (!isFunction(fn)) {
+      console.error(
+        `useMemoizedFn expected parameter is a function, got ${typeof fn}`,
+      )
+    }
+  }
+
+  const fnRef = useRef<T>(fn)
+
+  // why not write `fnRef.current = fn`?
+  // https://github.com/alibaba/hooks/issues/728
+  fnRef.current = useMemo(() => fn, [fn])
+
+  const memoizedFn = useRef<PickFunction<T>>()
+  if (!memoizedFn.current) {
+    memoizedFn.current = function (this, ...args) {
+      return fnRef.current.apply(this, args)
+    }
+  }
+
+  return memoizedFn.current as T
+}
+
+export default useMemoizedFn
+```
+
+## 参考
+
+- [案例](https://juejin.cn/post/6844904079181905927)
+- [陷阱](https://juejin.cn/post/7246643397426036796?searchId=202308021143481D3E3557CE0B4A841F36)
+
+<p align="right">23.08.02</p>

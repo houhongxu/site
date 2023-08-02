@@ -1,4 +1,4 @@
-# merge：合并 commits
+# merge
 
 pull 的内部操作其实是把远程仓库取到本地后（使用的是 fetch），再用一次 merge 来把远端仓库的新 commits 合并到本地
 

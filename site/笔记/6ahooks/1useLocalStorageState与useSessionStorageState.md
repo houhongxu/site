@@ -1,12 +1,12 @@
-# createUseStorageState
-
-包括：
+# useLocalStorageState 与 useSessionStorageState
 
 - useLocalStorageState
 - useSessionStorageState
 
-都是通过函数 useLocalStorageState
+都是通过函数 createUseStorageState
 来生成
+
+## createUseStorageState
 
 ```ts
 const isBrowser = !!(

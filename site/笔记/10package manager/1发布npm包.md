@@ -21,7 +21,3 @@
 `yarn publish --access public`
 
 使用上方指令将作用域包发布为公共
-
-## 问题
-
-link 用来测试 bin，但是未 unlink 会导致后续使用该包失败

@@ -1,4 +1,4 @@
-# checkout 的本质
+# checkout
 
 checkout 并不止可以切换 branch。checkout 本质上的功能其实是：签出（ checkout ）指定的 commit
 

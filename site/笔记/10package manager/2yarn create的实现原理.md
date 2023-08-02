@@ -1,4 +1,4 @@
-# create 的实现原理
+# yarn create 的实现原理
 
 `yarn create react-app my-app`
 相当于
@@ -24,7 +24,3 @@ create-koa-cli
 ```
 
 这样就可以通过`create-koa-cli`指令来控制项目文件的创建
-
-## break change
-
-大版本变化导致上一个版本不能适配下一个版本
