@@ -1,4 +1,4 @@
-# Feature Branching
+# feature branch
 
 最流行的工作流
 
