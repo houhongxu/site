@@ -1,10 +1,10 @@
 lockfileVersion: 5.4
 
 specifiers:
-  hhxpress: ^0.1.49
+  hhxpress: ^0.1.52
 
 dependencies:
-  hhxpress: 0.1.49
+  hhxpress: 0.1.52
 
 packages:
 
@@ -1480,8 +1480,9 @@ packages:
     resolution: {integrity: sha512-nAxA0v8+vXSBDt3AnRUNjyRIQ0rD+ntpbAp4LnPkumc5M9yUbSMa4XDU9Q6etY4f1Wp4bNgvc1yjiZtsTTrSng==}
     dev: false
 
-  /hhxpress/0.1.49:
-    resolution: {integrity: sha512-dD2R2r3lz4Yyd2uBbEUKWO1FKSU6CILasminCI/EqH9CsHUBt+M28MerAS+ub7UcRV0VUkURYfbNu5Dyvm3qfA==}
+  /hhxpress/0.1.52:
+    resolution: {integrity: sha512-9nRg0C6eaFSjlu8Qv1kDtDPnKs/C1uU+deVMvZMOpxEa0Y07f/YwYtETnNrkZ4cF9LN6ytdqBTpE6IuOU3hqJA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     dependencies:
       '@babel/core': 7.22.5
