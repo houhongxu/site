@@ -1,4 +1,4 @@
-# useUpdateLayoutEffect 与 useLayoutEffect
+# useUpdateEffect 与 useUpdateLayoutEffect
 
 - useUpdateEffect
 - useUpdateLayoutEffect：useLayoutEffect 在浏览器渲染前调用，但是损害性能，尽量不用

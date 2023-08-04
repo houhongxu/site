@@ -1,0 +1,13 @@
+# 理论上 useCallback 可以被完全替换
+
+用过 ahooks 后一直有一个疑问，为什么说[useMemoizedFn](https://ahooks.js.org/zh-CN/hooks/use-memoized-fn)理论上，可以使用 useMemoizedFn 完全代替 [useCallback](https://react.dev/reference/react/useCallback)。
+
+因为 useCallback 是为了缓存函数，但是因为更新函数内状态时，函数的地址也随之更新
+
+而 useMemoizedFn 可以更新状态的同时保持地址不变
+
+这不仅仅可以替换 useCallback，而且可以优化 memo 的使用，解决函数作为 memo 渲染条件的困扰
+
+<a href="../../笔记/6ahooks/3useMemoizedFn与useLatest">23.08.03</a>
+
+<p align="right">23.08.03</p>
