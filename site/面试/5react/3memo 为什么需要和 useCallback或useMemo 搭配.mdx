@@ -1,0 +1,151 @@
+# memo 为什么需要和 useCallback 或 useMemo 搭配
+
+memo 本身 api 并不复杂，仅仅是通过对比 props 来缓存组件，但是因为要考虑什么时候缓存，所以需要考虑到父组件的各种状态情况，就变得复杂了一些
+
+## memo
+
+```jsx
+const Parent = () => {
+  const [count, setCount] = useState(0)
+  const [right, setRight] = useState(false)
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => setCount((pre) => pre + 1)}>加一</button>
+
+      <Child right={right} />
+    </div>
+  )
+}
+
+const Child = ({ right }) => (
+  <div>
+    {right ? '对' : '错'} {console.log('我是子组件，我渲染了')}
+  </div>
+)
+```
+
+[官方文档](https://react.dev/reference/react/memo)
+
+react 渲染父组件时会重新渲染**所有子组件**
+
+memo 可以用来减少子组件这种多次渲染
+
+比如父组件有状态 count 与状态 right 两个状态，子组件仅用到状态 right，当状态 count 使父组件重新渲染时，子组件会一起重新渲染
+
+```jsx
+const Parent = () => {
+  const [count, setCount] = useState(0)
+  const [right, setRight] = useState(false)
+
+  const handleClick = () => {
+    console.log('我是父组件的引用类型变量，我的地址每次都变')
+  }
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => setCount((pre) => pre + 1)}>加一</button>
+
+      <Child right={right} handleClick={handleClick} />
+    </div>
+  )
+}
+
+const Child = memo(({ right, handleClick }) => (
+  <div onClick={handleClick}>
+    {right ? '对' : '错'} {console.log('我是子组件，我渲染了')}
+  </div>
+))
+```
+
+memo 通过**浅比较** props 的每个值 来判断是否需要重新渲染子组件，而且可以指定具体渲染条件
+
+这个浅比较很关键，当属性是**基本类型变量**时，比较是是其本身的值，当属性是函数等**引用类型变量**时，比较的是引用的地址
+
+属性在父组件是否是状态也很关键，如果是状态，就算是**引用类型变量**比如对象，那地址也是不随父组件每次渲染而刷新的
+
+所以，需要严格关注**引用类型变量**在父组件的情况
+
+比如 这里子组件属性是 right，那么当 right 值不变时，子组件就不随父组件渲染
+
+如果这里子组件属性是 handleClick，因为 handleClick 在父组件不是状态，所以父组件每次渲染都刷新其地址，所以 memo 也没有效果，需要配合 useCallback
+
+所以 memo 在属性不仅仅是基本类型变量时，需要配合一些 hook 使用
+
+> 如果子组件渲染性能消耗不是很多的话就没必要使用 memo，因为缓存本身就消耗性能， useCallback 或 useMemo 同理
+
+### 当 props 在父组件都是状态时
+
+无需额外考虑
+
+### 当 props 有在父组件不是状态的引用类型变量时
+
+```jsx
+const Parent = () => {
+  const [count, setCount] = useState(0)
+  const [right, setRight] = useState(false)
+
+  const handleClick = useCallback(() => {
+    console.log('我是引用类型变量，我的地址每次都变')
+  }, [])
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => setCount((pre) => pre + 1)}>加一</button>
+
+      <Child right={right} handleClick={handleClick} />
+    </div>
+  )
+}
+
+const Child = memo(({ right, handleClick }) => (
+  <div onClick={handleClick}>
+    {right ? '对' : '错'} {console.log('我是子组件，我渲染了')}
+  </div>
+))
+```
+
+如果是对象，可以使用 useMemo 搭配 deps
+如果是函数，同理使用 useCallback 搭配 deps
+
+### 当 props 有在父组件不是状态的引用类型变量 且 引用类型变量包含其他父组件状态时
+
+```jsx
+const Parent = () => {
+  const [count, setCount] = useState(0)
+  const [right, setRight] = useState(false)
+
+  const handleClick = useCallback(() => {
+    console.log('我是引用类型变量，我的地址每次都变', count)
+  }, [count])
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => setCount((pre) => pre + 1)}>加一</button>
+
+      <Child right={right} handleClick={handleClick} />
+    </div>
+  )
+}
+
+const Child = memo(({ right, handleClick }) => (
+  <div onClick={handleClick}>
+    {right ? '对' : '错'} {console.log('我是子组件，我渲染了')}
+  </div>
+))
+```
+
+就算是包裹 useCallback
+
+因为父组件状态改变，handleClick 地址也会改变，memo 就相当于失效了
+
+但是 通过 [useMemoizedFn](https://ahooks.js.org/zh-CN/hooks/use-memoized-fn)
+
+函数可以更新状态但是不改变地址
+
+<p align="right">23.08.07</p>
+```
