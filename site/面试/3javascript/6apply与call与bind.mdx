@@ -1,7 +1,65 @@
 # apply 与 call 与 bind
 
+本文章使用了 mdx，可以直接在控制台调用 myXXX 函数测试
+
 ## apply
 
+```js
+Function.prototype.myApply = function (thisArg = globalThis, argArray) {
+  const key = Symbol('key')
+
+  thisArg[key] = this
+  const newFn = thisArg[key](argArray)
+  delete thisArg[key]
+  return newFn
+}
 ```
 
+## call
+
+```js
+Function.prototype.myCall = function (thisArg = globalThis, ...argArray) {
+  const key = Symbol('key')
+
+  thisArg[key] = this
+  const newFn = thisArg[key](...argArray)
+  delete thisArg[key]
+  return newFn
+}
 ```
+
+## bind
+
+```js
+Function.prototype.myBind = function (thisArg = globalThis, ...argArray) {
+  return (...args) => this.call(thisArg, ...argArray, ...args)
+}
+```
+
+{
+Function.prototype.myApply = function (thisArg = globalThis, argArray) {
+const key = Symbol('key')
+
+thisArg[key] = this
+const newFn = thisArg[key](argArray)
+delete thisArg[key]
+return newFn
+}
+}
+
+{
+Function.prototype.myCall = function (thisArg = globalThis, ...argArray) {
+const key = Symbol('key')
+
+thisArg[key] = this
+const newFn = thisArg[key](...argArray)
+delete thisArg[key]
+return newFn
+}
+}
+
+{
+Function.prototype.myBind = function (thisArg = globalThis, ...argArray) {
+return (...args) => this.call(thisArg, ...argArray, ...args)
+}
+}

@@ -33,8 +33,9 @@ function useMemoizedFn<T extends noop>(fn: T) {
   // 只赋值一次，所以memoizedFn引用不会变化，且始终为最新的fn
   const memoizedFn = useRef<PickFunction<T>>()
   if (!memoizedFn.current) {
-    // 这里的this是适配eslint的eslint no-invalid-this https://github.com/alibaba/hooks/pull/1464
+    // 这里的第一个参数this是适配eslint的eslint no-invalid-this https://github.com/alibaba/hooks/pull/1464
     memoizedFn.current = function (this, ...args) {
+      // 这里是适配函数被对象等调用的情况，防止this指向丢失
       return fnRef.current.apply(this, args)
     }
   }
