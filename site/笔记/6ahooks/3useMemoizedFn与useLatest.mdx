@@ -1,19 +1,19 @@
 # useMemoizedFn 与 useLatest
 
 - useMemoizedFn： 理论上可以替换 useCallback
-- useLatest
-
-可以解决 闭包陷阱 问题，其实我感觉仅仅是 闭包特性
 
 ```ts
 type noop = (this: any, ...args: any[]) => any
 
+// https://github.com/alibaba/hooks/pull/1470
 type PickFunction<T extends noop> = (
   this: ThisParameterType<T>,
   ...args: Parameters<T>
 ) => ReturnType<T>
 
+// 返回更新了状态但是地址不变的fn
 function useMemoizedFn<T extends noop>(fn: T) {
+  // 开发环境日志
   if (isDev) {
     if (!isFunction(fn)) {
       console.error(
@@ -22,14 +22,18 @@ function useMemoizedFn<T extends noop>(fn: T) {
     }
   }
 
+  // 使用useRef获取最新的fn
   const fnRef = useRef<T>(fn)
 
+  // 适配 react devtool
   // why not write `fnRef.current = fn`?
   // https://github.com/alibaba/hooks/issues/728
   fnRef.current = useMemo(() => fn, [fn])
 
+  // 只赋值一次，所以memoizedFn引用不会变化，且始终为最新的fn
   const memoizedFn = useRef<PickFunction<T>>()
   if (!memoizedFn.current) {
+    // 这里的this是适配eslint的eslint no-invalid-this https://github.com/alibaba/hooks/pull/1464
     memoizedFn.current = function (this, ...args) {
       return fnRef.current.apply(this, args)
     }
@@ -37,13 +41,18 @@ function useMemoizedFn<T extends noop>(fn: T) {
 
   return memoizedFn.current as T
 }
-
-export default useMemoizedFn
 ```
 
-## 参考
+- useLatest
 
-- [案例](https://juejin.cn/post/6844904079181905927)
-- [陷阱](https://juejin.cn/post/7246643397426036796?searchId=202308021143481D3E3557CE0B4A841F36)
+```ts
+// 简化ref需要取current的值流程
+function useLatest<T>(value: T) {
+  const ref = useRef(value)
+  ref.current = value
 
-<p align="right">23.08.02</p>
+  return ref
+}
+```
+
+<p align="right">23.08.07</p>
