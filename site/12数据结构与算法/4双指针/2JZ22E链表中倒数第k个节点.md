@@ -1,4 +1,4 @@
-# 删除链表的节点
+# 链表中倒数第 k 个节点
 
 [🔗 LeetCode](https://leetcode.cn/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
 
