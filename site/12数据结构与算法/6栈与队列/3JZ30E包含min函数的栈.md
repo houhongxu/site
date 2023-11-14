@@ -1,4 +1,4 @@
-# 包含 min 函数的栈 TODO
+# 包含 min 函数的栈
 
 [🔗 LeetCode](https://leetcode.cn/problems/bao-han-minhan-shu-de-zhan-lcof/)
 
