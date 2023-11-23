@@ -4,55 +4,196 @@
 
 根据各个教程学习的时候，往往我第一个遇到的问题就是区分cjs,esm,umd等模块规范
 
-无论是npm等包管理，还是webpack等打包器，归根到底都是对包的处理，而包的产生，就是因为模块化
+无论是npm等包管理，还是webpack等打包器，归根到底都是对包的处理，而包的产生，就是起步于模块化
+
+没有模块化的话
+
+
+## 原始的模块化
+
+### 文件划分
+
+别人的包内的变量名就会与自己代码内的冲突
+
+```ts
+var data = 1
+
+function log() {
+  console.log(data)
+}
+```
+### 命名空间
+
+包内的变量容易被修改
+
+```ts
+window.moduleA = {
+  data:1,
+  log: function () {
+    console.log(data)
+  }
+};
+```
+### IIFE
+
+模块无法管理包互相依赖，无法保证script引入的执行顺序
+
+```ts
+(function () {
+  var data = 1
+
+  function log() {
+    console.log(data);
+  }
+
+  window.moduleA = {
+    log
+  }
+})()
+```
 
 ## cjs-amd-umd-esm
 
-cjs 是 node 原生支持的规范，由 node 实现 loader，无法直接用于浏览器，而且同步加载不适用于浏览器
+### commonJS
 
-所以有了 amd 规范，异步加载，但是 loader 未被浏览器官方实现，所以需要用 loader 库，比如 requirejs
+- cjs 是 node 原生支持的规范，由 node 实现 loader，无法直接用于浏览器
 
-umd 是 cjs 与 amd 的兼容，不作为规范，虽然已经过时，但是现在仍然用于 react 发包
+- cjs 同步加载不适用于浏览器，会阻塞页面渲染
 
-esm 规范由 ecma 官方支持，所以浏览器与 node 都进行了 loader 支持，而且 node 中的 cjs 模块依旧可以直接使用 esm 导入 esm 模块
+- cjs 导入时，会导入对象的副本
 
-## chalk5 只支持 esm
+- cjs 是动态的，函数内可以导入，所以不支持`Tree Shaking`，只能全量打包
 
-chalk5 不支持 cjs
-[见文档](https://github.com/chalk/chalk)
+- cjs 模块在第一次被加载后会被缓存在`require.cache`中，可以通过`require.resolve`获取包路径key
 
-> IMPORTANT: Chalk 5 is ESM. If you want to use Chalk with TypeScript or a build tool, you will probably want to use Chalk 4 for now. Read more.
+- cjs 模块代码包装在IIFE中
 
-## 浏览器等不支持 导入 mjs 文件
+```ts
+// cjs需要注意两个exports本质是一个对象
+exports = module.exports 
 
-mdx 也不支持导入 使用 mjs 文件 的库
-但是支持 antd 源码使用的的 导入方式，
-因为里面 esm 导入方式的文件也是 js 文件
-所以研究了一下， tsup 可以 打包为支持 esm 的库，但是不使用 mjs
-[见文档](https://tsup.egoist.dev/#output-extension)
+(function(exports, require, module, __filename, __dirname) {
+  var dep1 = require('dep1');
+  var dep2 = require('dep2');
+  // 模块代码写在这里
+  // ...
+  module.exports = {
+    name: '我是cjs模块',
+  }
+}); 
+```
+### amd/cmd
 
-## esm 与 cjs 互相引入
+所以有了 amd/cmd 规范，异步加载，适合浏览器环境
 
-esm 是异步
-cjs 是同步
+但是 loader 未被浏览器官方实现，所以需要用 loader 库，比如 requirejs
 
-esm 可以直接引入 cjs
-cjs 引入 esm 需要处理，require 改成 await import ，且需要异步环境
+不支持`Tree Shaking`，只能全量打包
 
-> tsc 会处理 await import 为 require，则需要封装函数 c`onst dynamicImport = new Function('m', 'return import(m)');` 包装一下 await import
+目前已经很少使用了
 
-## ts
+```ts
+define(["dep1","dep2"],function (dep1,dep2) {
+    // 模块代码写在这里
+    // ...    
+    return function () {
+      return {
+        name: '我是cjs模块',
+      }
+    };
+});
+```
 
-ts 配置 "esModuleInterop": true // 在 ESM 语法中导入 CJS 模块时通常需要加上这个配置
-可以 ESM 语法中直接导入 CJS 模块
+### umd
 
-## rollup
+umd 是 cjs 与 amd/cmd 的集多家之长版本，并不是一个规范
 
-rollup 是原生只支持 esm 的，使用 cjs 需要插件，但是很常用
+通过判断规范来进行统一执行
 
-## 导入库的时候是怎么区分 cjs 与 esm 文件的
+因为其通用性，现在仍然用于 react 发包等
 
-库会配置 package.json 字段
+```ts
+(function(root, factory) {
+    if (typeof module === 'object' && typeof module.exports === 'object') {
+        console.log('是commonjs模块规范，nodejs环境')
+        var dep1 = require('dep1');
+        var dep2 = require('dep2');
+        module.exports = factory(dep1,dep2);
+    } else if (typeof define === 'function' && define.amd) {
+        console.log('是AMD模块规范，如require.js')
+        define(["dep1","dep2"],factory)
+    } else if (typeof define === 'function' && define.cmd) {
+        console.log('是CMD模块规范，如sea.js')
+        define(function(require, exports, module) {
+            var dep1 = require('dep1');
+            var dep2 = require('dep2');
+            module.exports = factory(dep1,dep2)
+        })
+    } else {
+        console.log('没有模块环境，直接挂载在全局对象上')
+        root.umdModule = factory(root.require);
+    }
+}(this, function(dep1,dep2) {
+    // 模块代码写在这里
+    return {
+        name: '我是umd模块'
+    }
+}))
+
+```
+### esm
+
+- esm 规范由 ecmascript 官方支持，基于js语言，所以浏览器与 node 都进行了 loader 支持
+
+- esm 是异步加载，适用于浏览器与node
+
+- esm 导入时，会导入对象的引用
+
+- esm 是静态的，函数内无法使用，所以支持`Tree Shaking`
+
+```ts
+import dep1 from "dep1";
+import dep2 from "dep2";
+
+const log = () => {
+  console.log("我是esm模块");
+};
+
+export { log };
+```
+
+#### esm统一大业
+
+各个库在进行仅支持esm的规范化
+
+如
+- chalk5 只支持 esm [见文档](https://github.com/chalk/chalk)
+
+## esm 与 cjs 的兼容
+
+先看一下对比
+
+- esm 支持浏览器与node | cjs仅支持浏览器
+
+- esm 是异步加载 | cjs 同步加载
+
+- esm 导入对象的引用 | cjs 导入对象的副本
+
+- esm 支持`Tree Shaking` | cjs 不支持`Tree Shaking`
+
+esm 可以直接引入 cjs模块的，异步执行同步没问题，并且`import xxx from 'xxx.cjs'`可以拿到全部内容（ts 需要配置 "esModuleInterop": true）
+
+cjs 引入 esm 则需要将esm改为`await import同步写法`且需要异步环境
+
+而打包工具通过各自自己的方式进行了兼容
+
+如
+- webpack 将两者都打包成自己实现的webpackRequire
+
+
+### 导入包的时候是怎么区分 cjs 与 esm 文件的
+
+包可以配置 package.json 字段
 
 ```json
 {
@@ -72,21 +213,6 @@ rollup 是原生只支持 esm 的，使用 cjs 需要插件，但是很常用
   }
 }
 ```
-
-### rollup 支持的打包格式
-
-- amd – 异步模块定义，用于像 RequireJS 这样的模块加载器
-- cjs – CommonJS，适用于 Node 和 Browserify/Webpack
-- esm – 将软件包保存为 ES 模块文件，在现代浏览器中可以通过 `<script type=module>` 标签引入
-- iife – 一个自动执行的功能，适合作为`<script>`标签。（如果要为应用程序创建一个捆绑包，您可能想要使用它，因为它会使文件大小变小。）
-- umd – 通用模块定义，以 amd，cjs 和 iife 为一体
-- system - SystemJS 加载器格式
-
-## antd
-
-es/index.js 下就是 es6 的打包方式
-dist/antd.js 下就是 umd 的打包方式
-lib/index.js 下就是 cjs 的打包方式
 
 
 <p align="right">23.11.23</p>
