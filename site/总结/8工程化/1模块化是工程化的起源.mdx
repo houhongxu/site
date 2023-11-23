@@ -1,0 +1,224 @@
+# 模块化是工程化的起源
+
+每天浏览文章或多或少都能看到工程化的字样，前端工程化是高阶前端必不可少的能力，也是前端岗位分离出来的原因之一
+
+根据各个教程学习的时候，往往我第一个遇到的问题就是区分 cjs,esm,umd 等模块规范
+
+无论是 npm 等包管理，还是 webpack 等打包器，归根到底都是对包的处理，而包的产生，就是起步于模块化
+
+没有模块化的话
+
+## 原始的模块化
+
+### 文件划分
+
+别人的包内的变量名就会与自己代码内的冲突
+
+```ts
+var data = 1
+
+function log() {
+  console.log(data)
+}
+```
+
+### 命名空间
+
+包内的变量容易被修改
+
+```ts
+window.moduleA = {
+  data: 1,
+  log: function () {
+    console.log(data)
+  },
+}
+```
+
+### IIFE
+
+模块无法管理包互相依赖，无法保证 script 引入的执行顺序
+
+```ts
+;(function () {
+  var data = 1
+
+  function log() {
+    console.log(data)
+  }
+
+  window.moduleA = {
+    log,
+  }
+})()
+```
+
+## cjs-amd-umd-esm
+
+### commonJS
+
+- cjs 是 node 原生支持的规范，由 node 实现 loader，无法直接用于浏览器
+
+- cjs 同步加载不适用于浏览器，会阻塞页面渲染
+
+- cjs 导入时，会导入对象的副本
+
+- cjs 是动态的，函数内可以导入，所以不支持`Tree Shaking`，只能全量打包
+
+- cjs 模块在第一次被加载后会被缓存在`require.cache`中，可以通过`require.resolve`获取包路径 key
+
+- cjs 模块代码包装在 IIFE 中
+
+```ts
+// cjs需要注意两个exports本质是一个对象
+exports = module.exports(function (
+  exports,
+  require,
+  module,
+  __filename,
+  __dirname,
+) {
+  var dep1 = require('dep1')
+  var dep2 = require('dep2')
+  // 模块代码写在这里
+  // ...
+  module.exports = {
+    name: '我是cjs模块',
+  }
+})
+```
+
+### amd/cmd
+
+所以有了 amd/cmd 规范，异步加载，适合浏览器环境
+
+但是 loader 未被浏览器官方实现，所以需要用 loader 库，比如 requirejs
+
+不支持`Tree Shaking`，只能全量打包
+
+目前已经很少使用了
+
+```ts
+define(['dep1', 'dep2'], function (dep1, dep2) {
+  // 模块代码写在这里
+  // ...
+  return function () {
+    return {
+      name: '我是cjs模块',
+    }
+  }
+})
+```
+
+### umd
+
+umd 是 cjs 与 amd/cmd 的集多家之长版本，并不是一个规范
+
+通过判断规范来进行统一执行
+
+因为其通用性，现在仍然用于 react 发包等
+
+```ts
+;(function (root, factory) {
+  if (typeof module === 'object' && typeof module.exports === 'object') {
+    console.log('是commonjs模块规范，nodejs环境')
+    var dep1 = require('dep1')
+    var dep2 = require('dep2')
+    module.exports = factory(dep1, dep2)
+  } else if (typeof define === 'function' && define.amd) {
+    console.log('是AMD模块规范，如require.js')
+    define(['dep1', 'dep2'], factory)
+  } else if (typeof define === 'function' && define.cmd) {
+    console.log('是CMD模块规范，如sea.js')
+    define(function (require, exports, module) {
+      var dep1 = require('dep1')
+      var dep2 = require('dep2')
+      module.exports = factory(dep1, dep2)
+    })
+  } else {
+    console.log('没有模块环境，直接挂载在全局对象上')
+    root.umdModule = factory(root.require)
+  }
+})(this, function (dep1, dep2) {
+  // 模块代码写在这里
+  return {
+    name: '我是umd模块',
+  }
+})
+```
+
+### esm
+
+- esm 规范由 ecmascript 官方支持，基于 js 语言，所以浏览器与 node 都进行了 loader 支持
+
+- esm 是异步加载，适用于浏览器与 node
+
+- esm 导入时，会导入对象的引用
+
+- esm 是静态的，函数内无法使用，所以支持`Tree Shaking`
+
+```ts
+import dep1 from 'dep1'
+import dep2 from 'dep2'
+
+const log = () => {
+  console.log('我是esm模块')
+}
+
+export { log }
+```
+
+#### esm 统一大业
+
+各个库在进行仅支持 esm 的规范化
+
+如
+
+- chalk5 只支持 esm [见文档](https://github.com/chalk/chalk)
+
+## esm 与 cjs 的兼容
+
+先看一下对比
+
+- esm 支持浏览器与 node | cjs 仅支持浏览器
+
+- esm 是异步加载 | cjs 同步加载
+
+- esm 导入对象的引用 | cjs 导入对象的副本
+
+- esm 支持`Tree Shaking` | cjs 不支持`Tree Shaking`
+
+esm 可以直接引入 cjs 模块的，异步执行同步没问题，并且`import xxx from 'xxx.cjs'`可以拿到全部内容（ts 需要配置 "esModuleInterop": true）
+
+cjs 引入 esm 则需要将 esm 改为`await import同步写法`且需要异步环境
+
+而打包工具通过各自自己的方式进行了兼容
+
+如
+
+- webpack 将两者都打包成自己实现的 webpackRequire
+
+### 导入包的时候是怎么区分 cjs 与 esm 文件的
+
+包可以配置 package.json 字段
+
+```json
+{
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js"
+}
+```
+
+还可以用 exports 字段
+优先级比 main 和 module 高，也就是说，匹配上 exports 的路径就不会使用 main 和 module 的路径。
+
+```json
+{
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
+  }
+}
+```
+
+<p align="right">23.11.23</p>
