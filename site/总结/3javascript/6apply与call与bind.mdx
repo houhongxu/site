@@ -38,31 +38,41 @@ Function.prototype.myBind = function (thisArg = globalThis, ...argArray) {
 
 测试 js 执行
 
-<>{
-function (Function.prototype.myApply = function (thisArg = globalThis, argArray) {
-const key = Symbol('key')
+<>
+  {
+    Function.prototype.myCall = function (thisArg = globalThis, ...argArray) {
+      const key = Symbol('key')
 
-thisArg[key] = this
-const newFn = thisArg[key](argArray)
-delete thisArg[key]
-return newFn
-})()
-console.log('我是 mdx 里的 js')
-}</>
+      thisArg[key] = this
+      const newFn = thisArg[key](...argArray)
+      delete thisArg[key]
+      return newFn
+    }
 
-{
-function (Function.prototype.myCall = function (thisArg = globalThis, ...argArray) {
-const key = Symbol('key')
-
-thisArg[key] = this
-const newFn = thisArg[key](...argArray)
-delete thisArg[key]
-return newFn
-})()
 }
 
-{
-function (Function.prototype.myBind = function (thisArg = globalThis, ...argArray) {
-return (...args) => this.call(thisArg, ...argArray, ...args)
-})()
+</>
+
+<>
+  {
+    Function.prototype.myApply = function (thisArg = globalThis, argArray) {
+      const key = Symbol('key')
+
+      thisArg[key] = this
+      const newFn = thisArg[key](argArray)
+      delete thisArg[key]
+
+      return newFn
+    }
+
 }
+
+</>
+
+<>
+  {
+    (Function.prototype.myBind = function (thisArg = globalThis, ...argArray) {
+      return (...args) => this.call(thisArg, ...argArray, ...args)
+    })
+  }
+</>
