@@ -36,7 +36,9 @@ Function.prototype.myBind = function (thisArg = globalThis, ...argArray) {
 }
 ```
 
-{
+测试 js 执行
+
+<>{
 function (Function.prototype.myApply = function (thisArg = globalThis, argArray) {
 const key = Symbol('key')
 
@@ -45,7 +47,8 @@ const newFn = thisArg[key](argArray)
 delete thisArg[key]
 return newFn
 })()
-}
+console.log('我是 mdx 里的 js')
+}</>
 
 {
 function (Function.prototype.myCall = function (thisArg = globalThis, ...argArray) {
