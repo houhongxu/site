@@ -3,8 +3,7 @@
 - useLocalStorageState
 - useSessionStorageState
 
-都是通过函数 createUseStorageState
-来生成
+都是通过函数 createUseStorageState来生成
 
 ## createUseStorageState
 
@@ -97,6 +96,7 @@ export function createUseStorageState(getStorage: () => Storage | undefined) {
 
     return [state, useMemoizedFn(updateState)] as const
   }
+  
   return useStorageState
 }
 ```

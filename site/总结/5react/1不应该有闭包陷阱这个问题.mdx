@@ -4,13 +4,13 @@
 
 奇怪的是我平时的开发并没有遇到过
 
-一方面是因为我们项目规模较小，比较少的特地优化 react 组件渲染次数
-
-二是我感觉闭包陷阱并没有必要称为陷阱，而仅仅是闭包特性，来源于 react 的特性（心智负担？）
+我感觉闭包陷阱并没有必要称为陷阱，而仅仅是闭包特性，来源于 react 的特性（心智负担？）
 
 就如 dan 所说：useEffect 拿到的总是定义它的那次渲染中的 props 和 state。这能够避免一些 bugs，但在一些场景中又会有些讨人嫌。
 
 > 具体特性可以阅读 dan 佬的博客文章[useEffect 完整指南](https://overreacted.io/zh-hans/a-complete-guide-to-useeffect/)
+
+## 闭包陷阱
 
 ```jsx
 function Counter() {
@@ -31,7 +31,7 @@ function Counter() {
 }
 ```
 
-上面这个案例，一直点击加一按钮，打印的一直是 0
+上面这个案例，一直点击加一按钮，打印的一直是 0，这就是所谓的闭包陷阱
 
 这个问题在于 useEffect 的 deps 填的是[]，那只有第一次渲染才会使用闭包保存 state，此时 count 就是 0
 
@@ -40,11 +40,5 @@ function Counter() {
 react 的函数组件会在每次渲染保存那次渲染的 props 和 state（闭包）
 
 这就是闭包特性，和函数的闭包类似的特性，这就是为什么写 react 像写 js，不仅仅是因为 jsx
-
-而当有时候需要新的他们时，发现仅仅拿到了旧的，这才是闭包可能遇到的问题
-
-react 当然也有解决他的方法：
-
-[useRef](https://react.dev/reference/react/useRef)
 
 <p align="right">23.08.03</p>
