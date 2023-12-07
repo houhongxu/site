@@ -1,0 +1,120 @@
+# 看得见的原型链
+
+> chrome 版本 119.0.6045.159（正式版本） (arm64) ，控制台特性一直变化，所以需要记录版本
+
+原型链就是原型对象链
+
+## 原型对象
+
+原型对象就是一个初始有一个初始属性 constructor 的对象
+
+原型对象在函数声明时会随着函数创建
+
+通过函数的 prototype 属性可以访问原型对象
+
+通过函数的 prototype 属性的 constructor 属性又可以访问函数
+
+如：
+
+```ts
+function Dog(name, age) {
+  this.name = name
+  this.age = age
+}
+
+console.log(Dog.prototype)
+console.log(Dog.prototype.constructor)
+```
+
+![1](/img/interview/3/2-1.jpg)
+
+原型对象可以通过`Dog.prototype`访问
+函数本身可以通过`Dog.prototype.constructor`访问
+
+而原型对象是通过实例的`__proto__`属性链接的
+
+## 实例
+
+> new 可以通过 <a href="./1变量提升 与 闭包 与 this 与 new 那得从 V8 执行上下文 说起">变量提升 与 闭包 与 this 与 new 那得从 V8 执行上下文 说起</a> 了解
+
+通过 new 关键字使用函数，则函数就是构造函数了，往往通过名称大写区分
+
+new 构造函数会返回一个对象，就叫实例
+
+对象字面量`{}`等字面量也是实例，是 js 引擎构造的
+
+既然对象字面量也是实例
+
+那么
+
+原型对象也是实例
+
+实例都有一个特殊的隐藏属性`__proto__`，值为 null 或者原型对象
+
+这样原型链就可以观察了
+
+通过`dog.__proto__.__proto__ ...`直到 null
+
+如：
+
+![2](/img/interview/3/2-2.jpg)
+
+这就是原型链
+
+> 建议最好不要使用`__proto__`了，这是个历史遗留问题，文章是为了方便呈现链的效果，现代编程语言建议我们应该使用函数 Object.getPrototypeOf/Object.setPrototypeOf 来取代 `__proto__` 去 get/set 原型
+
+另外，原型链也可以在 chorme 控制台中直观看到，通过`[[Prototype]]`属性
+
+### chorme 控制台的`[[Prototype]]`
+
+`[[Prototype]]`不是内部 JavaScript 属性，它是 Chromium 调试器创建的功能
+
+[见 stackoverflow](https://stackoverflow.com/questions/75718019/display-of-proto-vs-prototype-in-chrome-developer-tools)
+
+如：
+
+![3](/img/interview/3/2-3.jpg)
+
+在控制台就可以看到 dog 的`[[Prototype]]`属性
+
+`[[Prototype]]`链接的对象就是原型对象
+
+## 原型继承
+
+原型继承就是当我们从 dog 中读取一个缺失的属性时
+，JavaScript 会自动从原型中获取该属性
+
+所以我们经常这样把方法写在原型对象中，这样实例就都可以使用了
+
+```ts
+Dog.prototype.eat = function () {
+  console.log('肉骨头真好吃')
+}
+```
+
+![4](/img/interview/3/2-4.jpg)
+
+> 原型对象中 constructor 链接构造函数，这样通过实例也就可以知道是谁创建了它`dog.constructor`
+
+## Object.create()
+
+Object.create(proto, [descriptors])可以利用给定的 proto 作为 `__proto__` 和可选的属性描述来创建一个空对象
+
+可以使用 Object.create 来实现完整对象克隆
+
+比复制 for..in 循环中的属性更强大
+
+复制所有的属性：`__proto__`，数据属性和 setters/getters ，可枚举和不可枚举的
+
+```js
+let clone = Object.create(
+  Object.getPrototypeOf(obj),
+  Object.getOwnPropertyDescriptors(obj),
+)
+```
+
+## 参考资料
+
+[现代 javascript](https://zh.javascript.info/prototypes)
+
+<p align="right">23.11.24</p>
