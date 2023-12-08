@@ -208,12 +208,27 @@ obj.logName()
 
 但是我们使用面向对象时，经常需要 logName 访问 obj 对象的 name 属性，并且可以继承复用
 
-所以就有了 this 机制，根据函数调用方式的不同指向不同值：
+所以就有了 this 机制，
+
+上面创建执行上下文的时候也创建了 this，所以 this 也是分为：
+
+- 全局执行上下文 this
+- 函数执行上下文 this
+- eval 执行上下文 this (暂不考虑)
+
+而他们都是一种指向：
 
 - 直接调用：在浏览器中，指向 window，严格模式指向 undefined。node 中则指向 global，严格模式指向 undefined
+
+也有方法使 this 指向不同值：
+
 - 对象方法调用：this 指向调用它的对象
 - call/apply/bind 方法调用：指向函数设置的值
 - new 构造函数 调用：指向新创建的对象
+
+> setTimeout 方法中的 this ，即使使用对象方法调用也是指向 window/global
+
+有了 this 后就不一样了，如：
 
 ```js
 var obj = {
@@ -304,7 +319,7 @@ var myObj = new createObj()
 - 执行 createObj 函数为 tempObj 对象赋值
 - 返回 构造函数返回的对象，没有则返回 tempObj 对象
 
-> 原型对象可以通过 <a href="./看得见的原型链">看得见的原型链</a> 了解
+> 原型对象可以通过 <a href="./2看得见的原型链.html">看得见的原型链</a> 了解
 
 相当于代码：
 

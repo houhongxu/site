@@ -1,78 +1,110 @@
 # apply 与 call 与 bind
 
-本文章使用了 mdx，可以直接在控制台调用 myXXX 函数测试
-
 ## apply
+
+使用指定 this 和参数数组调用函数
+
+例子：
+
+```js
+const person = {
+  firstName: 'John',
+  lastName: 'Doe',
+  fullName: function (param) {
+    return `${param},${this.firstName} ${this.lastName}`
+  },
+}
+
+const anotherPerson = {
+  firstName: 'Jane',
+  lastName: 'Doe',
+}
+
+console.log(person.fullName.apply(anotherPerson, ['hi'])) // 输出 "hi,Jane Doe"
+```
 
 ```js
 Function.prototype.myApply = function (thisArg = globalThis, argArray) {
+  // globalThis是全局的this指向如window/global/undefined
+
+  // 唯一key防止覆盖
   const key = Symbol('key')
 
-  thisArg[key] = this
-  const newFn = thisArg[key](argArray)
+  // 调用apply的函数
+  const fn = this
+
+  // 绑定 fn 到thisArg
+  thisArg[key] = fn
+
+  // 使用thisArg 调用fn 并传参
+  // 这里使用?.[]语法方便辨认是对象方法的调用，这样就改变了fn的this指向thisArg
+  const res = thisArg?.[key](...argArray)
+
+  // 删除绑定
   delete thisArg[key]
-  return newFn
+
+  return res
 }
 ```
 
 ## call
 
+使用指定 this 和多个参数调用函数
+
+例子：
+
+```js
+const person = {
+  firstName: 'John',
+  lastName: 'Doe',
+  fullName: function (param) {
+    return `${param},${this.firstName} ${this.lastName}`
+  },
+}
+
+const anotherPerson = {
+  firstName: 'Jane',
+  lastName: 'Doe',
+}
+
+console.log(person.fullName.call(anotherPerson, 'hi')) // 输出 "hi,Jane Doe"
+```
+
 ```js
 Function.prototype.myCall = function (thisArg = globalThis, ...argArray) {
+  // globalThis是全局的this指向如window/global/undefined
+
+  // 唯一key防止覆盖
   const key = Symbol('key')
 
-  thisArg[key] = this
-  const newFn = thisArg[key](...argArray)
+  // 调用apply的函数
+  const fn = this
+
+  // 绑定 fn 到thisArg
+  thisArg[key] = fn
+
+  // 使用thisArg 调用fn 并传参
+  // 这里使用?.[]语法方便辨认是对象方法的调用，这样就改变了fn的this指向thisArg
+  const res = thisArg?.[key](...argArray)
+
+  // 删除绑定
   delete thisArg[key]
-  return newFn
+
+  return res
 }
 ```
 
+> 除了入参和 apply 一样
+
 ## bind
+
+给函数绑定指定 this，但是不直接调用而是返回函数
 
 ```js
 Function.prototype.myBind = function (thisArg = globalThis, ...argArray) {
+  // 不使用call实现会比较麻烦
   return (...args) => this.call(thisArg, ...argArray, ...args)
 }
 ```
 
-测试 js 执行
-
-<>
-  {
-    Function.prototype.myCall = function (thisArg = globalThis, ...argArray) {
-      const key = Symbol('key')
-
-      thisArg[key] = this
-      const newFn = thisArg[key](...argArray)
-      delete thisArg[key]
-      return newFn
-    }
-
-}
-
-</>
-
-<>
-  {
-    Function.prototype.myApply = function (thisArg = globalThis, argArray) {
-      const key = Symbol('key')
-
-      thisArg[key] = this
-      const newFn = thisArg[key](argArray)
-      delete thisArg[key]
-
-      return newFn
-    }
-
-}
-
-</>
-
-<>
-  {
-    (Function.prototype.myBind = function (thisArg = globalThis, ...argArray) {
-      return (...args) => this.call(thisArg, ...argArray, ...args)
-    })
-  }
-</>
+<p align="right">23.12.07</p>

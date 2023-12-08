@@ -1,6 +1,22 @@
-# useMemoizedFn 与 useLatest
+# useLatest 与 useMemoizedFn
 
-- useMemoizedFn： 理论上可以替换 useCallback
+## useLatest
+
+获取最新值的 hook，但是不能避免对象的地址改变
+
+```ts
+// 每次渲染都将最新的value存到ref中，但是value如果是引用类型地址还是会变
+function useLatest<T>(value: T) {
+  const ref = useRef(value)
+  ref.current = value
+
+  return ref
+}
+```
+
+## useMemoizedFn
+
+获取最新更新了状态的最新函数的 hook，而且函数地址不变，理论上可以替换 useCallback
 
 ```ts
 type noop = (this: any, ...args: any[]) => any
@@ -22,7 +38,11 @@ function useMemoizedFn<T extends noop>(fn: T) {
     }
   }
 
-  // 使用useRef获取最新的fn
+  // fnRef因为适配所以分开写
+  // 本质就是fnRef=useLatest(fn)
+  // 注意fnRef.current的地址会改变
+
+  // 使用useRef保存最新的fn
   const fnRef = useRef<T>(fn)
 
   // 适配 react devtool
@@ -30,30 +50,22 @@ function useMemoizedFn<T extends noop>(fn: T) {
   // https://github.com/alibaba/hooks/issues/728
   fnRef.current = useMemo(() => fn, [fn])
 
-  // 只赋值一次，所以memoizedFn引用不会变化，且始终为最新的fn
+  // 初始化memoizedFn，memoizedFn.current的函数地址不会改变
   const memoizedFn = useRef<PickFunction<T>>()
+
+  // 只有初始化时赋值
   if (!memoizedFn.current) {
     // 这里的第一个参数this是适配eslint的eslint no-invalid-this https://github.com/alibaba/hooks/pull/1464
+    // 这里是防止函数地址改变才包裹一层function
+    // 防止函数this指向丢失使用apply调用
     memoizedFn.current = function (this, ...args) {
-      // 这里是适配函数被对象等调用的情况，防止this指向丢失
       return fnRef.current.apply(this, args)
     }
   }
 
+  // 返回的memoizedFn.current始终是通过function包裹的fn.current，fn.current保证是最新的函数
   return memoizedFn.current as T
 }
 ```
 
-- useLatest
-
-```ts
-// 简化ref需要取current的值流程
-function useLatest<T>(value: T) {
-  const ref = useRef(value)
-  ref.current = value
-
-  return ref
-}
-```
-
-<p align="right">23.08.07</p>
+<p align="right">23.12.08</p>
