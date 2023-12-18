@@ -23,5 +23,3 @@ taro 传参一般有六种方式
 - taro 事件中心
 - taro 页面栈
 - 自行命名的 JS 文件控制 globalData
-
-<p align="right">23.08.16</p>

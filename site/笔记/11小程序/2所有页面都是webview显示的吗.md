@@ -35,5 +35,3 @@ tabbar 和 navbar 是原生的，页面内容都是 webview
 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
 
 所以 tab 页面是不会关闭的，所以就不会重新加载
-
-<p align="right">23.08.02</p>

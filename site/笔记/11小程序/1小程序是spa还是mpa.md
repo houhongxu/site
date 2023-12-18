@@ -21,5 +21,3 @@ taro 的打包产物中，每一个页面都是由三个文件组成：
 > 更详细的说明关于为什么选择双线程，则见[教程文档](https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0006a2289c8bb0bb0086ee8c056c0a)与[博文的笔记](https://github.com/berwin/Blog/issues/43)
 
 由上面的 3 就能得知小程序是 mpa 了
-
-<p align="right">23.08.02</p>

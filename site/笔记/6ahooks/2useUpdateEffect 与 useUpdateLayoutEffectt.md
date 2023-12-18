@@ -1,6 +1,6 @@
 # useUpdateEffect 与 useUpdateLayoutEffect
 
-##useUpdateEffect 与 useUpdateLayoutEffect
+## useUpdateEffect 与 useUpdateLayoutEffect
 
 - useUpdateEffect：跳过第一次渲染的 useEffect
 - useUpdateLayoutEffect：跳过第一次渲染的 useLayoutEffect
@@ -35,5 +35,3 @@ export const createUpdateEffect: (hook: EffectHookType) => EffectHookType =
     }, deps)
   }
 ```
-
-<p align="right">23.12.08</p>

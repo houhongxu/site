@@ -67,5 +67,3 @@ function useMemoizedFn<T extends noop>(fn: T) {
   return memoizedFn.current as T
 }
 ```
-
-<p align="right">23.12.08</p>

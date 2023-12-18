@@ -348,5 +348,3 @@ const useCountdown = (options: Options = {}) => {
   return [timeLeft, formattedRes] as const
 }
 ```
-
-<p align="right">23.12.01</p>
