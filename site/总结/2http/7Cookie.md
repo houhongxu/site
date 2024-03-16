@@ -1,4 +1,4 @@
-# Cookie\*
+# Cookie
 
 HTTP 是无状态协议
 
