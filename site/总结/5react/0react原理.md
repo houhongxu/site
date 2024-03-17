@@ -20,7 +20,7 @@ jsx 本质就是语法糖，使用 react.createElement(16)或者 jsx-runtime(17 
 
 fiber 会根据 ReactElement 生成 fiber 树，并会使用 diff 算法根据新 ReactElement 与旧 fiber 对比来尽可能复用 fiber
 
-hook 的数据就是保存在 fiber.memoizedState 的链表上的，每个 hook 对应一个链表节点
+hook 的数据就是保存在 fiber.memoizedState 的链表上的，每个 hook 对应一个链表节点，通过 hook.next 访问下一个 hook，像 useRef、useCallback、useMemo 等比较简单的，就是根据逻辑拿取 hook.memoizedState
 
 ### 双缓存架构
 
@@ -132,8 +132,6 @@ useEffect 异步执行的原因主要是防止同步执行时阻塞浏览器渲�
 - 时间切片
 - 优先级调度 (react 实现的为 lanes 模型，互相调用时会转换)
 
-> 优先级最终会反映到 update.lane 变量
-
 ### 时间切片
 
 时间切片的本质是模拟实现 requestIdleCallback
@@ -151,6 +149,12 @@ requestAnimationFrame 常用做流畅动画就是因为会在渲染前完成
 requestIdleCallback 是在“浏览器重排/重绘”后如果当前帧还有空余时间时被调用
 
 ### 优先级调度
+
+Lane 优先级（31 种，基于二进制方式保存）是 fiber 树构造过程相关的优先级。
+事件优先级（4 种）是 Scheduler 优先级和 Lane 优先级相互转换的桥梁。
+Scheduler 优先级（5 种）是 scheduler 调度中心相关的优先级。
+
+> 优先级最终会反映到 update.lane 变量
 
 给 run 传入优先级和函数，scheduler 会在合适的时机调用函数
 
@@ -177,3 +181,13 @@ lanes 将任务优先级的概念与任务批处理分离开来，lanes 的优�
 lanes 模型，使用 31 位的二进制表示 31 条赛道，位数越小的赛道优先级越高，某些相邻的赛道拥有相同优先级
 
 优先级越高赛道就一个，优先级越低赛道就越多，因为越低优先级的更新越容易被打断，导致积压下来，所以需要更多的位
+
+## 并发特性和并发更新
+
+就好比你想开空调（开启并发更新），首先你打开屋子的总开关（使用 concurrent 模式），然后你再去打开空调的开关（使用并发特性）
+
+## 并发更新
+
+就是
+
+两个 setState 引起的两个渲染流程，先处理上面那次渲染的 1、2、3 的 fiber 节点，然后处理下面那次渲染的 1、2、3、4、5、6 的 fiber 节点，之后继续处理上面那次渲染的 4、5、6 的 fiber 节点。
