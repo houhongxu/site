@@ -148,6 +148,9 @@ requestAnimationFrame 常用做流畅动画就是因为会在渲染前完成
 
 requestIdleCallback 是在“浏览器重排/重绘”后如果当前帧还有空余时间时被调用
 
+react 一开始是用 requestAnimationFrame+postmessage 实现
+后面换成 message channel+postmessage 实现
+
 ### 优先级调度
 
 Lane 优先级（31 种，基于二进制方式保存）是 fiber 树构造过程相关的优先级。

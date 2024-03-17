@@ -19,7 +19,7 @@ key/value 对
 - Path：路径
 - Secure：仅通过 HTTPS 协议传递
 - HttpOnly：禁止`javascript`操作 Cookie，可以避免 XSS 的窃取 Cookie 的攻击
-- SameSite：跨站策略，默认禁止跨站，但可以跨域，可以避免 CSRF 攻击
+- SameSite：跨站策略，默认禁止跨站，但可以跨域，可以避免 CSRF 攻击，跨站必跨域，跨域不一定跨站
 
 ## Set-Cookie 响应头
 
