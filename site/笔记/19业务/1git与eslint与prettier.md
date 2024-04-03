@@ -14,14 +14,15 @@
 
 所以需要统一规范
 
-## 推荐统一仓库为 LF 换行符
+## 统一仓库为 LF 换行符
 
-首先配置 git 避免自动转换换行符与提交时警告
+首先配置仓库的 eslint 规则，一般默认规则就是 lf 换行符
 
-让 win 开发者配置`git config --global core.autocrlf true`和`git config --global core.safecrlf warn`
-让 mac 开发者配置`git config --global core.autocrlf input`和`git config --global core.safecrlf warn`
+让开发者配置`git config --global core.autocrlf false`
 
-但是更推荐配置仓库，使用.gitattributes 文件
+然后开发者配置编辑器如 vscode `"files.eol": "\n"`(可以补充在文档)
+
+也可以在仓库配置.gitattributes，则免于开发者配置编辑器
 
 ```yml
 # Set the default behavior, in case people don't have core.autocrlf set.
@@ -52,15 +53,6 @@ git config --global core.safecrlf false
 git config --global core.safecrlf warn
 ```
 
-通过 vscode files.eol 控制自动转换
+## prettier 配置
 
-或者要改变 git 也可以使用 .gitattributes 根据仓库配置
-
-```git
-# Set the default behavior, in case people don't have core.autocrlf set.
-* text eol=lf
-```
-
-## prettier 配置需要统一写在文档
-
-目前似乎是使用插件默认配置，需要在文档提醒
+目前似乎是使用插件默认配置(可以补充在文档)
