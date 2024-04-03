@@ -16,16 +16,32 @@
 
 ## 统一仓库为 LF 换行符
 
-首先配置仓库的 eslint 规则，一般默认规则就是 lf 换行符
+目前的策略：
 
-让开发者配置`git config --global core.autocrlf false`
+- 首先配置仓库的 eslint 规则，一般默认规则就是 lf 换行符
 
-然后开发者配置编辑器如 vscode `"files.eol": "\n"`(可以补充在文档)
+- 让开发者配置`git config --global core.autocrlf false`
 
-也可以在仓库配置.gitattributes，则免于开发者配置编辑器
+- 然后开发者配置编辑器如 vscode `"files.eol": "\n"`(可以补充在文档)
+
+也可以使用其他策略：
+
+- 先忽略 eslint 规则
+
+```json
+  "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      },
+    ],
+```
+
+- 在仓库配置.gitattributes，就免于开发者配置了
 
 ```yml
 # Set the default behavior, in case people don't have core.autocrlf set.
+# 配置默认行为，commit时转换换行符格式为lf
 * text eol=lf
 ```
 
