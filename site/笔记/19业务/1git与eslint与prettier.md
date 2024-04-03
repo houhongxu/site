@@ -18,7 +18,8 @@
 
 首先配置 git 避免自动转换换行符与提交时警告
 
-让开发者配置`git config --global core.autocrlf false`和`git config --global core.safecrlf warn`
+让 win 开发者配置`git config --global core.autocrlf true`和`git config --global core.safecrlf warn`
+让 mac 开发者配置`git config --global core.autocrlf input`和`git config --global core.safecrlf warn`
 
 但是更推荐配置仓库，使用.gitattributes 文件
 
