@@ -1,4 +1,4 @@
-# Host 与 :authority
+# Host 与 authority
 
 1. 通过 nc 命令直接发送报文控制 Host 请求头的发送
 
