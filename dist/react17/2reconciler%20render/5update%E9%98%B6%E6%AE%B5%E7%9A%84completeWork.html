@@ -1,0 +1,581 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZEROPRESS</title>
+  <link rel="stylesheet" href="/assets/client-entry-Dj2YQCT4.css">
+  <body>
+    <div id="root"><header class="pc:fixed absolute left-0 top-0 z-50 w-full"><div class="border-divider bg-bg-default h-nav border-b px-[12px] pt-px transition-colors duration-300"><div class="flex h-full items-center justify-between"><div class="flex h-full justify-start"><div class="h-full"><nav class="mx-[12px] flex h-full items-center"><a class="cursor-pointer"><img src="/logo.jpg" class="h-[24px] w-[24px]"/></a></nav></div></div><div class="flex h-full justify-end"><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-text-2 text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">http</a></nav></div><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-brand text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">react17</a></nav></div><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-text-2 text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">数据结构与算法</a></nav></div><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-text-2 text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">设计模式</a></nav></div><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-text-2 text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">笔记</a></nav></div><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-text-2 text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">总结</a></nav></div><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-text-2 text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">收集</a></nav></div><div class="h-full"><nav class="mx-[12px] h-full justify-end"><a class="cursor-pointer text-text-2 text-hover flex h-full items-center whitespace-nowrap text-[14px] font-[500]">业务</a></nav></div><div class="h-full"><nav class="mx-[4px] flex h-full items-center"><button class="bg-bg-switch border-divider hover:border-gray-1 relative h-[22px] w-[40px] rounded-[11px] border transition-colors duration-300"><div class="bg-bg-inverse shadow-1 absolute left-px top-px h-[18px] w-[18px] overflow-hidden rounded-[50%] transition-all duration-300 dark:translate-x-[18px]"><span class="*:text-text-2 *:absolute *:left-[3px] *:top-[3px] *:h-[12px] *:w-[12px] *:transition-opacity *:duration-300"><div class="icon-[carbon--sun] opacity-100 dark:opacity-0"></div><div class="icon-[carbon--moon] opacity-0 dark:opacity-100"></div></span></div></button></nav></div><div class="h-full"><nav class="mx-[12px] h-full"><a href="https://github.com/houhongxu/hhxpress" class="cursor-pointer text-text-2 text-hover flex  h-full items-center"><span class="icon-[carbon--logo-github] h-[24px] w-[24px]"></span></a></nav></div></div></div></div></header><div class="pt-nav"><aside class="mt-nav w-sidebar border-divider bg-bg-sidebar pc:-translate-x-0 fixed inset-y-0 left-0 z-40 -translate-x-full overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300"><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><span>intro</span><span class="rotate-90 icon-[carbon--chevron-right] transition-transform duration-300"></span></h2><div style="height:108px" class="mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">流程</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">架构</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">fiber</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">jsx</a></div></div><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><span>reconciler render</span><span class="rotate-90 icon-[carbon--chevron-right] transition-transform duration-300"></span></h2><div style="height:162px" class="mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">流程</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">mount阶段的beginWork</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">mount阶段的completeWork</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">update阶段的beginWork</a><a class="cursor-pointer text-brand text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">update阶段的completeWork</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">进入commit()阶段</a></div></div><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><span>reconciler commit</span><span class="rotate-90 icon-[carbon--chevron-right] transition-transform duration-300"></span></h2><div style="height:27px" class="mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">流程</a></div></div><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><a class="cursor-pointer">readme</a></h2></div></aside><div class="pc:ml-sidebar ml-0 flex justify-between"><div class="mx-auto w-full max-w-[768px] transition-[margin] duration-300"><div class="h-nav pc:hidden bg-bg-default sticky top-0 z-50 w-full border-b"><div class="flex h-full items-center justify-between px-[24px]"><a class="icon-[carbon--list] h-[24px] w-[24px] cursor-pointer"></a><a class="icon-[carbon--border-top] h-[24px] w-[24px] cursor-pointer"></a></div><div class="fixed inset-0 bg-[#00000060] transition-all duration-300 opacity-0 invisible"></div><aside class="w-sidebar border-divider bg-bg-sidebar fixed inset-y-0 left-0 z-40 overflow-y-auto border-r px-[28px] py-[16px] transition-transform duration-300 -translate-x-full"><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><span>intro</span><span class="rotate-90 icon-[carbon--chevron-right] transition-transform duration-300"></span></h2><div style="height:108px" class="mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">流程</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">架构</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">fiber</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">jsx</a></div></div><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><span>reconciler render</span><span class="rotate-90 icon-[carbon--chevron-right] transition-transform duration-300"></span></h2><div style="height:162px" class="mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">流程</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">mount阶段的beginWork</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">mount阶段的completeWork</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">update阶段的beginWork</a><a class="cursor-pointer text-brand text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">update阶段的completeWork</a><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">进入commit()阶段</a></div></div><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><span>reconciler commit</span><span class="rotate-90 icon-[carbon--chevron-right] transition-transform duration-300"></span></h2><div style="height:27px" class="mb-[12px] flex flex-col overflow-hidden pl-[1rem] transition-[height] duration-300"><a class="cursor-pointer text-text-2 text-hover mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap p-[2px] text-[14px]">流程</a></div></div><div class="border-divider mt-[4px] border-t first:mt-0 first:border-t-0"><h2 class="text-text-1 mb-[6px] mt-[12px] flex cursor-pointer items-center justify-between font-[700]"><a class="cursor-pointer">readme</a></h2></div></aside><div class="fixed inset-0  bg-[#00000060] transition-all duration-300 opacity-0 invisible"></div><aside class="w-toc border-divider bg-bg-sidebar fixed inset-y-0 right-0 z-40  h-full border-l px-[28px] py-[16px] transition-transform duration-300 translate-x-full"><div class="border-divider pc:border-l px-[16px] font-[500]"><div class="pc:block bg-brand absolute left-0 hidden h-[18px] w-px transition-[opacity,top] duration-300" style="top:33px;opacity:0"></div><div class="text-[14px] font-[600] leading-[28px]">本页目录</div><div><div><a href="#completework" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">completeWork</a></div><div><a href="#updatehostcomponent1" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">updateHostComponent$1</a></div><div><a href="#prepareupdate" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:1rem">prepareUpdate</a></div><div><a href="#diffproperties" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">diffProperties</a></div></div></div></aside></div><div class="p-[48px]"><div class="doc"><h1 id="update-阶段的-completework"><a class="autolink-headings" href="#update-阶段的-completework"><span style="margin-right:4px">#</span></a>update 阶段的 completeWork</h1>
+<p>:::tip
+lane 关键字 相关的内容和调度相关，暂时跳过
+:::</p>
+<p><img src="/img/note/7/1.jpg" alt="1"/></p>
+<p>:::note
+:::</p>
+<h2 id="completework"><a class="autolink-headings" href="#completework"><span style="margin-right:4px">#</span></a>completeWork</h2>
+<p>完成工作</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#fff;color:#24292e" tabindex="0" data-language="js" data-theme="github-light"><code data-language="js" data-theme="github-light" style="display:grid"><span data-line=""><span style="color:#D73A49">function</span><span style="color:#6F42C1"> completeWork</span><span style="color:#24292E">(</span><span style="color:#E36209">current</span><span style="color:#24292E">, </span><span style="color:#E36209">workInProgress</span><span style="color:#24292E">, </span><span style="color:#E36209">renderLanes</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">  var</span><span style="color:#24292E"> newProps </span><span style="color:#D73A49">=</span><span style="color:#24292E"> workInProgress.pendingProps</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 根据tag调用不同函数</span></span>
+<span data-line=""><span style="color:#D73A49">  switch</span><span style="color:#24292E"> (workInProgress.tag) {</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> IndeterminateComponent:</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> LazyComponent:</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> SimpleMemoComponent:</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> FunctionComponent:</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> ForwardRef:</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> Fragment:</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> Mode:</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> Profiler:</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> ContextConsumer:</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> MemoComponent:</span></span>
+<span data-line=""><span style="color:#D73A49">      return</span><span style="color:#005CC5"> null</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> ClassComponent: {</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> Component </span><span style="color:#D73A49">=</span><span style="color:#24292E"> workInProgress.type</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">isContextProvider</span><span style="color:#24292E">(Component)) {</span></span>
+<span data-line=""><span style="color:#6F42C1">        popContext</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      return</span><span style="color:#005CC5"> null</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> HostComponent: {</span></span>
+<span data-line=""><span style="color:#6F42C1">      popHostContext</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> rootContainerInstance </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getRootHostContainer</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> type </span><span style="color:#D73A49">=</span><span style="color:#24292E"> workInProgress.type</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (current </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> null</span><span style="color:#D73A49"> &amp;&amp;</span><span style="color:#24292E"> workInProgress.stateNode </span><span style="color:#D73A49">!=</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#6A737D">        // current存在且dom存在</span></span>
+<span data-line=""><span style="color:#6A737D">        // 更新时进入这里，current更新时一直存在，workInProgress.stateNode是复用current的</span></span>
+<span data-line=""><span style="color:#6F42C1">        updateHostComponent$1</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#24292E">          current,</span></span>
+<span data-line=""><span style="color:#24292E">          workInProgress,</span></span>
+<span data-line=""><span style="color:#24292E">          type,</span></span>
+<span data-line=""><span style="color:#24292E">          newProps,</span></span>
+<span data-line=""><span style="color:#24292E">          rootContainerInstance,</span></span>
+<span data-line=""><span style="color:#24292E">        )</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (current.ref </span><span style="color:#D73A49">!==</span><span style="color:#24292E"> workInProgress.ref) {</span></span>
+<span data-line=""><span style="color:#6F42C1">          markRef$1</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""><span style="color:#24292E">      } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">        // 渲染时才进入这里</span></span>
+<span data-line=""><span style="color:#6A737D">        // 内容检查</span></span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">newProps) {</span></span>
+<span data-line=""><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">(workInProgress.stateNode </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> null</span><span style="color:#24292E">)) {</span></span>
+<span data-line=""><span style="color:#24292E">            {</span></span>
+<span data-line=""><span style="color:#D73A49">              throw</span><span style="color:#6F42C1"> Error</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#032F62">                &#x27;We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.&#x27;</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">              )</span></span>
+<span data-line=""><span style="color:#24292E">            }</span></span>
+<span data-line=""><span style="color:#24292E">          } </span><span style="color:#6A737D">// This can happen when we abort work.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">          return</span><span style="color:#005CC5"> null</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        var</span><span style="color:#24292E"> currentHostContext </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostContext</span><span style="color:#24292E">() </span><span style="color:#6A737D">// TODO: Move createInstance to beginWork and keep it on a context</span></span>
+<span data-line=""><span style="color:#6A737D">        // &quot;stack&quot; as the parent. Then append children as we go in beginWork</span></span>
+<span data-line=""><span style="color:#6A737D">        // or completeWork depending on whether we want to add them top-&gt;down or</span></span>
+<span data-line=""><span style="color:#6A737D">        // bottom-&gt;up. Top-&gt;down is faster in IE11.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">        // ssr相关暂时跳过</span></span>
+<span data-line=""><span style="color:#D73A49">        var</span><span style="color:#24292E"> _wasHydrated </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> popHydrationState</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (_wasHydrated) {</span></span>
+<span data-line=""><span style="color:#6A737D">          // ssr相关暂时跳过</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">          // TODO: Move this and createInstance step into the beginPhase</span></span>
+<span data-line=""><span style="color:#6A737D">          // to consolidate.</span></span>
+<span data-line=""><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#6F42C1">            prepareToHydrateHostInstance</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#24292E">              workInProgress,</span></span>
+<span data-line=""><span style="color:#24292E">              rootContainerInstance,</span></span>
+<span data-line=""><span style="color:#24292E">              currentHostContext,</span></span>
+<span data-line=""><span style="color:#24292E">            )</span></span>
+<span data-line=""><span style="color:#24292E">          ) {</span></span>
+<span data-line=""><span style="color:#6A737D">            // If changes to the hydrated node need to be applied at the</span></span>
+<span data-line=""><span style="color:#6A737D">            // commit-phase we mark this as such.</span></span>
+<span data-line=""><span style="color:#6F42C1">            markUpdate</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#24292E">          }</span></span>
+<span data-line=""><span style="color:#24292E">        } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">          // 为fiber创建dom节点</span></span>
+<span data-line=""><span style="color:#D73A49">          var</span><span style="color:#24292E"> instance </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> createInstance</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#24292E">            type,</span></span>
+<span data-line=""><span style="color:#24292E">            newProps,</span></span>
+<span data-line=""><span style="color:#24292E">            rootContainerInstance,</span></span>
+<span data-line=""><span style="color:#24292E">            currentHostContext,</span></span>
+<span data-line=""><span style="color:#24292E">            workInProgress,</span></span>
+<span data-line=""><span style="color:#24292E">          )</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">          // 将创建的dom的子节点挂载到创建的dom上</span></span>
+<span data-line=""><span style="color:#6F42C1">          appendAllChildren</span><span style="color:#24292E">(instance, workInProgress, </span><span style="color:#005CC5">false</span><span style="color:#24292E">, </span><span style="color:#005CC5">false</span><span style="color:#24292E">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">          // 将dom存入fiber的stateNode属性</span></span>
+<span data-line=""><span style="color:#24292E">          workInProgress.stateNode </span><span style="color:#D73A49">=</span><span style="color:#24292E"> instance </span><span style="color:#6A737D">// Certain renderers require commit-time effects for initial mount.</span></span>
+<span data-line=""><span style="color:#6A737D">          // (eg DOM renderer supports auto-focus for certain elements).</span></span>
+<span data-line=""><span style="color:#6A737D">          // Make sure such renderers get scheduled for later work.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">          // 为dom节点设置属性</span></span>
+<span data-line=""><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#6F42C1">            finalizeInitialChildren</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#24292E">              instance,</span></span>
+<span data-line=""><span style="color:#24292E">              type,</span></span>
+<span data-line=""><span style="color:#24292E">              newProps,</span></span>
+<span data-line=""><span style="color:#24292E">              rootContainerInstance,</span></span>
+<span data-line=""><span style="color:#24292E">            )</span></span>
+<span data-line=""><span style="color:#24292E">          ) {</span></span>
+<span data-line=""><span style="color:#6F42C1">            markUpdate</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#24292E">          }</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (workInProgress.ref </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#6A737D">          // If there is a ref on a host node we need to schedule a callback</span></span>
+<span data-line=""><span style="color:#6F42C1">          markRef$1</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      return</span><span style="color:#005CC5"> null</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> HostText: {</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> newText </span><span style="color:#D73A49">=</span><span style="color:#24292E"> newProps</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (current </span><span style="color:#D73A49">&amp;&amp;</span><span style="color:#24292E"> workInProgress.stateNode </span><span style="color:#D73A49">!=</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">        var</span><span style="color:#24292E"> oldText </span><span style="color:#D73A49">=</span><span style="color:#24292E"> current.memoizedProps </span><span style="color:#6A737D">// If we have an alternate, that means this is an update and we need</span></span>
+<span data-line=""><span style="color:#6A737D">        // to schedule a side-effect to do the updates.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6F42C1">        updateHostText$1</span><span style="color:#24292E">(current, workInProgress, oldText, newText)</span></span>
+<span data-line=""><span style="color:#24292E">      } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">typeof</span><span style="color:#24292E"> newText </span><span style="color:#D73A49">!==</span><span style="color:#032F62"> &#x27;string&#x27;</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">(workInProgress.stateNode </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> null</span><span style="color:#24292E">)) {</span></span>
+<span data-line=""><span style="color:#24292E">            {</span></span>
+<span data-line=""><span style="color:#D73A49">              throw</span><span style="color:#6F42C1"> Error</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#032F62">                &#x27;We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.&#x27;</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">              )</span></span>
+<span data-line=""><span style="color:#24292E">            }</span></span>
+<span data-line=""><span style="color:#24292E">          } </span><span style="color:#6A737D">// This can happen when we abort work.</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        var</span><span style="color:#24292E"> _rootContainerInstance </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getRootHostContainer</span><span style="color:#24292E">()</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        var</span><span style="color:#24292E"> _currentHostContext </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostContext</span><span style="color:#24292E">()</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        var</span><span style="color:#24292E"> _wasHydrated2 </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> popHydrationState</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (_wasHydrated2) {</span></span>
+<span data-line=""><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">prepareToHydrateHostTextInstance</span><span style="color:#24292E">(workInProgress)) {</span></span>
+<span data-line=""><span style="color:#6F42C1">            markUpdate</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#24292E">          }</span></span>
+<span data-line=""><span style="color:#24292E">        } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#24292E">          workInProgress.stateNode </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> createTextInstance</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#24292E">            newText,</span></span>
+<span data-line=""><span style="color:#24292E">            _rootContainerInstance,</span></span>
+<span data-line=""><span style="color:#24292E">            _currentHostContext,</span></span>
+<span data-line=""><span style="color:#24292E">            workInProgress,</span></span>
+<span data-line=""><span style="color:#24292E">          )</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      return</span><span style="color:#005CC5"> null</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#24292E"> IncompleteClassComponent: {</span></span>
+<span data-line=""><span style="color:#6A737D">      // Same as class component case. I put it down here so that the tags are</span></span>
+<span data-line=""><span style="color:#6A737D">      // sequential to ensure this switch is compiled to a jump table.</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> _Component </span><span style="color:#D73A49">=</span><span style="color:#24292E"> workInProgress.type</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (</span><span style="color:#6F42C1">isContextProvider</span><span style="color:#24292E">(_Component)) {</span></span>
+<span data-line=""><span style="color:#6F42C1">        popContext</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      return</span><span style="color:#005CC5"> null</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 省略部分case</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">  {</span></span>
+<span data-line=""><span style="color:#24292E">    {</span></span>
+<span data-line=""><span style="color:#D73A49">      throw</span><span style="color:#6F42C1"> Error</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#032F62">        &#x27;Unknown unit of work tag (&#x27;</span><span style="color:#D73A49"> +</span></span>
+<span data-line=""><span style="color:#24292E">          workInProgress.tag </span><span style="color:#D73A49">+</span></span>
+<span data-line=""><span style="color:#032F62">          &#x27;). This error is likely caused by a bug in React. Please file an issue.&#x27;</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">      )</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span></code></pre></figure>
+<h2 id="updatehostcomponent1"><a class="autolink-headings" href="#updatehostcomponent1"><span style="margin-right:4px">#</span></a>updateHostComponent$1</h2>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#fff;color:#24292e" tabindex="0" data-language="js" data-theme="github-light"><code data-language="js" data-theme="github-light" style="display:grid"><span data-line=""><span style="color:#D73A49">var</span><span style="color:#24292E"> appendAllChildren</span></span>
+<span data-line=""><span style="color:#D73A49">var</span><span style="color:#24292E"> updateHostContainer</span></span>
+<span data-line=""><span style="color:#D73A49">var</span><span style="color:#24292E"> updateHostComponent$1</span></span>
+<span data-line=""><span style="color:#D73A49">var</span><span style="color:#24292E"> updateHostText$1</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">{</span></span>
+<span data-line=""><span style="color:#6A737D">  // Mutation mode</span></span>
+<span data-line=""><span style="color:#6F42C1">  appendAllChildren</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#E36209">    parent</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">    workInProgress</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">    needsVisibilityToggle</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">    isHidden</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">  ) {</span></span>
+<span data-line=""><span style="color:#6A737D">    // parent是当前fiber在createInstance创建的dom</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // We only have the top Fiber that was created but we need recurse down its</span></span>
+<span data-line=""><span style="color:#6A737D">    // children to find all the terminal nodes.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 获取子fiber</span></span>
+<span data-line=""><span style="color:#D73A49">    var</span><span style="color:#24292E"> node </span><span style="color:#D73A49">=</span><span style="color:#24292E"> workInProgress.child</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 渲染img时node为null,渲染code时为{num}或者&#x27;src/App.js&#x27;</span></span>
+<span data-line=""><span style="color:#D73A49">    while</span><span style="color:#24292E"> (node </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (node.tag </span><span style="color:#D73A49">===</span><span style="color:#24292E"> HostComponent </span><span style="color:#D73A49">||</span><span style="color:#24292E"> node.tag </span><span style="color:#D73A49">===</span><span style="color:#24292E"> HostText) {</span></span>
+<span data-line=""><span style="color:#6A737D">        // 渲染code时进入，将子dom挂载在当前dom上</span></span>
+<span data-line=""><span style="color:#6F42C1">        appendInitialChild</span><span style="color:#24292E">(parent, node.stateNode)</span></span>
+<span data-line=""><span style="color:#24292E">      } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (node.tag </span><span style="color:#D73A49">===</span><span style="color:#24292E"> HostPortal);</span></span>
+<span data-line=""><span style="color:#D73A49">      else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (node.child </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#24292E">        node.child.return </span><span style="color:#D73A49">=</span><span style="color:#24292E"> node</span></span>
+<span data-line=""><span style="color:#24292E">        node </span><span style="color:#D73A49">=</span><span style="color:#24292E"> node.child</span></span>
+<span data-line=""><span style="color:#D73A49">        continue</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (node </span><span style="color:#D73A49">===</span><span style="color:#24292E"> workInProgress) {</span></span>
+<span data-line=""><span style="color:#D73A49">        return</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      while</span><span style="color:#24292E"> (node.sibling </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (node.return </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> null</span><span style="color:#D73A49"> ||</span><span style="color:#24292E"> node.return </span><span style="color:#D73A49">===</span><span style="color:#24292E"> workInProgress) {</span></span>
+<span data-line=""><span style="color:#D73A49">          return</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">        node </span><span style="color:#D73A49">=</span><span style="color:#24292E"> node.return</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">      node.sibling.return </span><span style="color:#D73A49">=</span><span style="color:#24292E"> node.return</span></span>
+<span data-line=""><span style="color:#24292E">      node </span><span style="color:#D73A49">=</span><span style="color:#24292E"> node.sibling</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6F42C1">  updateHostContainer</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E"> (</span><span style="color:#E36209">workInProgress</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#6A737D">    // Noop</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6F42C1">  updateHostComponent$1</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#E36209">    current</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">    workInProgress</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">    type</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">    newProps</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">    rootContainerInstance</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">  ) {</span></span>
+<span data-line=""><span style="color:#6A737D">    // If we have an alternate, that means this is an update and we need to</span></span>
+<span data-line=""><span style="color:#6A737D">    // schedule a side-effect to do the updates.</span></span>
+<span data-line=""><span style="color:#D73A49">    var</span><span style="color:#24292E"> oldProps </span><span style="color:#D73A49">=</span><span style="color:#24292E"> current.memoizedProps</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (oldProps </span><span style="color:#D73A49">===</span><span style="color:#24292E"> newProps) {</span></span>
+<span data-line=""><span style="color:#6A737D">      // In mutation mode, this is sufficient for a bailout because</span></span>
+<span data-line=""><span style="color:#6A737D">      // we won&#x27;t touch this node even if children changed.</span></span>
+<span data-line=""><span style="color:#D73A49">      return</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#6A737D">// If we get updated because one of our children updated, we don&#x27;t</span></span>
+<span data-line=""><span style="color:#6A737D">    // have newProps so we&#x27;ll have to reuse them.</span></span>
+<span data-line=""><span style="color:#6A737D">    // TODO: Split the update API as separate for the props vs. children.</span></span>
+<span data-line=""><span style="color:#6A737D">    // Even better would be if children weren&#x27;t special cased at all tho.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    var</span><span style="color:#24292E"> instance </span><span style="color:#D73A49">=</span><span style="color:#24292E"> workInProgress.stateNode</span></span>
+<span data-line=""><span style="color:#D73A49">    var</span><span style="color:#24292E"> currentHostContext </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostContext</span><span style="color:#24292E">() </span><span style="color:#6A737D">// TODO: Experiencing an error where oldProps is null. Suggests a host</span></span>
+<span data-line=""><span style="color:#6A737D">    // component is hitting the resume path. Figure out why. Possibly</span></span>
+<span data-line=""><span style="color:#6A737D">    // related to `hidden`.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 准备 属性需要更新的属性的 名字和值 的数组</span></span>
+<span data-line=""><span style="color:#D73A49">    var</span><span style="color:#24292E"> updatePayload </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> prepareUpdate</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#24292E">      instance,</span></span>
+<span data-line=""><span style="color:#24292E">      type,</span></span>
+<span data-line=""><span style="color:#24292E">      oldProps,</span></span>
+<span data-line=""><span style="color:#24292E">      newProps,</span></span>
+<span data-line=""><span style="color:#24292E">      rootContainerInstance,</span></span>
+<span data-line=""><span style="color:#24292E">      currentHostContext,</span></span>
+<span data-line=""><span style="color:#24292E">    ) </span><span style="color:#6A737D">// TODO: Type this specific to this type of component.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 属性更新数组 赋值给updateQueue属性</span></span>
+<span data-line=""><span style="color:#24292E">    workInProgress.updateQueue </span><span style="color:#D73A49">=</span><span style="color:#24292E"> updatePayload </span><span style="color:#6A737D">// If the update payload indicates that there is a change or if there</span></span>
+<span data-line=""><span style="color:#6A737D">    // is a new ref we mark this as an update. All the work is done in commitWork.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (updatePayload) {</span></span>
+<span data-line=""><span style="color:#6A737D">      // 给workInProgress标记Update</span></span>
+<span data-line=""><span style="color:#6F42C1">      markUpdate</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6F42C1">  updateHostText$1</span><span style="color:#D73A49"> =</span><span style="color:#D73A49"> function</span><span style="color:#24292E"> (</span><span style="color:#E36209">current</span><span style="color:#24292E">, </span><span style="color:#E36209">workInProgress</span><span style="color:#24292E">, </span><span style="color:#E36209">oldText</span><span style="color:#24292E">, </span><span style="color:#E36209">newText</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#6A737D">    // If the text differs, mark it as an update. All the work in done in commitWork.</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (oldText </span><span style="color:#D73A49">!==</span><span style="color:#24292E"> newText) {</span></span>
+<span data-line=""><span style="color:#6F42C1">      markUpdate</span><span style="color:#24292E">(workInProgress)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span></code></pre></figure>
+<h3 id="prepareupdate"><a class="autolink-headings" href="#prepareupdate"><span style="margin-right:4px">#</span></a>prepareUpdate</h3>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#fff;color:#24292e" tabindex="0" data-language="js" data-theme="github-light"><code data-language="js" data-theme="github-light" style="display:grid"><span data-line=""><span style="color:#D73A49">function</span><span style="color:#6F42C1"> prepareUpdate</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#E36209">  domElement</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  type</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  oldProps</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  newProps</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  rootContainerInstance</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  hostContext</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#24292E">  {</span></span>
+<span data-line=""><span style="color:#D73A49">    var</span><span style="color:#24292E"> hostContextDev </span><span style="color:#D73A49">=</span><span style="color:#24292E"> hostContext</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#D73A49">      typeof</span><span style="color:#24292E"> newProps.children </span><span style="color:#D73A49">!==</span><span style="color:#D73A49"> typeof</span><span style="color:#24292E"> oldProps.children </span><span style="color:#D73A49">&amp;&amp;</span></span>
+<span data-line=""><span style="color:#24292E">      (</span><span style="color:#D73A49">typeof</span><span style="color:#24292E"> newProps.children </span><span style="color:#D73A49">===</span><span style="color:#032F62"> &#x27;string&#x27;</span><span style="color:#D73A49"> ||</span></span>
+<span data-line=""><span style="color:#D73A49">        typeof</span><span style="color:#24292E"> newProps.children </span><span style="color:#D73A49">===</span><span style="color:#032F62"> &#x27;number&#x27;</span><span style="color:#24292E">)</span></span>
+<span data-line=""><span style="color:#24292E">    ) {</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> string </span><span style="color:#D73A49">=</span><span style="color:#032F62"> &#x27;&#x27;</span><span style="color:#D73A49"> +</span><span style="color:#24292E"> newProps.children</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> ownAncestorInfo </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> updatedAncestorInfo</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#24292E">        hostContextDev.ancestorInfo,</span></span>
+<span data-line=""><span style="color:#24292E">        type,</span></span>
+<span data-line=""><span style="color:#24292E">      )</span></span>
+<span data-line=""><span style="color:#6F42C1">      validateDOMNesting</span><span style="color:#24292E">(</span><span style="color:#005CC5">null</span><span style="color:#24292E">, string, ownAncestorInfo)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#6F42C1"> diffProperties</span><span style="color:#24292E">(domElement, type, oldProps, newProps)</span></span>
+<span data-line=""><span style="color:#24292E">}</span></span></code></pre></figure>
+<h2 id="diffproperties"><a class="autolink-headings" href="#diffproperties"><span style="margin-right:4px">#</span></a>diffProperties</h2>
+<p>比较属性</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#fff;color:#24292e" tabindex="0" data-language="js" data-theme="github-light"><code data-language="js" data-theme="github-light" style="display:grid"><span data-line=""><span style="color:#D73A49">function</span><span style="color:#6F42C1"> diffProperties</span><span style="color:#24292E">(</span></span>
+<span data-line=""><span style="color:#E36209">  domElement</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  tag</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  lastRawProps</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  nextRawProps</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#E36209">  rootContainerElement</span><span style="color:#24292E">,</span></span>
+<span data-line=""><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#24292E">  {</span></span>
+<span data-line=""><span style="color:#6F42C1">    validatePropertiesInDevelopment</span><span style="color:#24292E">(tag, nextRawProps)</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  var</span><span style="color:#24292E"> updatePayload </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> null</span></span>
+<span data-line=""><span style="color:#D73A49">  var</span><span style="color:#24292E"> lastProps</span></span>
+<span data-line=""><span style="color:#D73A49">  var</span><span style="color:#24292E"> nextProps</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 根据tag处理一些表单标签</span></span>
+<span data-line=""><span style="color:#D73A49">  switch</span><span style="color:#24292E"> (tag) {</span></span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#032F62"> &#x27;input&#x27;</span><span style="color:#24292E">:</span></span>
+<span data-line=""><span style="color:#24292E">      lastProps </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostProps</span><span style="color:#24292E">(domElement, lastRawProps)</span></span>
+<span data-line=""><span style="color:#24292E">      nextProps </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostProps</span><span style="color:#24292E">(domElement, nextRawProps)</span></span>
+<span data-line=""><span style="color:#24292E">      updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> []</span></span>
+<span data-line=""><span style="color:#D73A49">      break</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#032F62"> &#x27;option&#x27;</span><span style="color:#24292E">:</span></span>
+<span data-line=""><span style="color:#24292E">      lastProps </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostProps$1</span><span style="color:#24292E">(domElement, lastRawProps)</span></span>
+<span data-line=""><span style="color:#24292E">      nextProps </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostProps$1</span><span style="color:#24292E">(domElement, nextRawProps)</span></span>
+<span data-line=""><span style="color:#24292E">      updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> []</span></span>
+<span data-line=""><span style="color:#D73A49">      break</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#032F62"> &#x27;select&#x27;</span><span style="color:#24292E">:</span></span>
+<span data-line=""><span style="color:#24292E">      lastProps </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostProps$2</span><span style="color:#24292E">(domElement, lastRawProps)</span></span>
+<span data-line=""><span style="color:#24292E">      nextProps </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostProps$2</span><span style="color:#24292E">(domElement, nextRawProps)</span></span>
+<span data-line=""><span style="color:#24292E">      updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> []</span></span>
+<span data-line=""><span style="color:#D73A49">      break</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    case</span><span style="color:#032F62"> &#x27;textarea&#x27;</span><span style="color:#24292E">:</span></span>
+<span data-line=""><span style="color:#24292E">      lastProps </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostProps$3</span><span style="color:#24292E">(domElement, lastRawProps)</span></span>
+<span data-line=""><span style="color:#24292E">      nextProps </span><span style="color:#D73A49">=</span><span style="color:#6F42C1"> getHostProps$3</span><span style="color:#24292E">(domElement, nextRawProps)</span></span>
+<span data-line=""><span style="color:#24292E">      updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> []</span></span>
+<span data-line=""><span style="color:#D73A49">      break</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    default</span><span style="color:#24292E">:</span></span>
+<span data-line=""><span style="color:#24292E">      lastProps </span><span style="color:#D73A49">=</span><span style="color:#24292E"> lastRawProps</span></span>
+<span data-line=""><span style="color:#24292E">      nextProps </span><span style="color:#D73A49">=</span><span style="color:#24292E"> nextRawProps</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#D73A49">        typeof</span><span style="color:#24292E"> lastProps.onClick </span><span style="color:#D73A49">!==</span><span style="color:#032F62"> &#x27;function&#x27;</span><span style="color:#D73A49"> &amp;&amp;</span></span>
+<span data-line=""><span style="color:#D73A49">        typeof</span><span style="color:#24292E"> nextProps.onClick </span><span style="color:#D73A49">===</span><span style="color:#032F62"> &#x27;function&#x27;</span></span>
+<span data-line=""><span style="color:#24292E">      ) {</span></span>
+<span data-line=""><span style="color:#6A737D">        // TODO: This cast may not be sound for SVG, MathML or custom elements.</span></span>
+<span data-line=""><span style="color:#6F42C1">        trapClickOnNonInteractiveElement</span><span style="color:#24292E">(domElement)</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      break</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 判断属性的合法性</span></span>
+<span data-line=""><span style="color:#6F42C1">  assertValidProps</span><span style="color:#24292E">(tag, nextProps)</span></span>
+<span data-line=""><span style="color:#D73A49">  var</span><span style="color:#24292E"> propKey</span></span>
+<span data-line=""><span style="color:#D73A49">  var</span><span style="color:#24292E"> styleName</span></span>
+<span data-line=""><span style="color:#D73A49">  var</span><span style="color:#24292E"> styleUpdates </span><span style="color:#D73A49">=</span><span style="color:#005CC5"> null</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 本次更新开始前的属性，属性被删除时</span></span>
+<span data-line=""><span style="color:#D73A49">  for</span><span style="color:#24292E"> (propKey </span><span style="color:#D73A49">in</span><span style="color:#24292E"> lastProps) {</span></span>
+<span data-line=""><span style="color:#6A737D">    // 更新后有 或者 现在没有则跳过</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#24292E">      nextProps.</span><span style="color:#6F42C1">hasOwnProperty</span><span style="color:#24292E">(propKey) </span><span style="color:#D73A49">||</span></span>
+<span data-line=""><span style="color:#D73A49">      !</span><span style="color:#24292E">lastProps.</span><span style="color:#6F42C1">hasOwnProperty</span><span style="color:#24292E">(propKey) </span><span style="color:#D73A49">||</span></span>
+<span data-line=""><span style="color:#24292E">      lastProps[propKey] </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> null</span></span>
+<span data-line=""><span style="color:#24292E">    ) {</span></span>
+<span data-line=""><span style="color:#D73A49">      continue</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> STYLE</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> lastStyle </span><span style="color:#D73A49">=</span><span style="color:#24292E"> lastProps[propKey]</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      for</span><span style="color:#24292E"> (styleName </span><span style="color:#D73A49">in</span><span style="color:#24292E"> lastStyle) {</span></span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (lastStyle.</span><span style="color:#6F42C1">hasOwnProperty</span><span style="color:#24292E">(styleName)) {</span></span>
+<span data-line=""><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">styleUpdates) {</span></span>
+<span data-line=""><span style="color:#24292E">            styleUpdates </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {}</span></span>
+<span data-line=""><span style="color:#24292E">          }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">          styleUpdates[styleName] </span><span style="color:#D73A49">=</span><span style="color:#032F62"> &#x27;&#x27;</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> DANGEROUSLY_SET_INNER_HTML</span><span style="color:#D73A49"> ||</span><span style="color:#24292E"> propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> CHILDREN</span><span style="color:#24292E">);</span></span>
+<span data-line=""><span style="color:#D73A49">    else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#24292E">      propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> SUPPRESS_CONTENT_EDITABLE_WARNING</span><span style="color:#D73A49"> ||</span></span>
+<span data-line=""><span style="color:#24292E">      propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> SUPPRESS_HYDRATION_WARNING</span></span>
+<span data-line=""><span style="color:#24292E">    );</span></span>
+<span data-line=""><span style="color:#D73A49">    else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> AUTOFOCUS</span><span style="color:#24292E">);</span></span>
+<span data-line=""><span style="color:#D73A49">    else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (registrationNameDependencies.</span><span style="color:#6F42C1">hasOwnProperty</span><span style="color:#24292E">(propKey)) {</span></span>
+<span data-line=""><span style="color:#6A737D">      // This is a special case. If any listener updates we need to ensure</span></span>
+<span data-line=""><span style="color:#6A737D">      // that the &quot;current&quot; fiber pointer gets updated so we need a commit</span></span>
+<span data-line=""><span style="color:#6A737D">      // to update this element.</span></span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">updatePayload) {</span></span>
+<span data-line=""><span style="color:#24292E">        updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> []</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">      // For all other deleted properties we add it to the queue. We use</span></span>
+<span data-line=""><span style="color:#6A737D">      // the allowed property list in the commit phase instead.</span></span>
+<span data-line=""><span style="color:#24292E">      ;(updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> updatePayload </span><span style="color:#D73A49">||</span><span style="color:#24292E"> []).</span><span style="color:#6F42C1">push</span><span style="color:#24292E">(propKey, </span><span style="color:#005CC5">null</span><span style="color:#24292E">)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">  // 本次更新需要改变的props，属性更新或者新增时</span></span>
+<span data-line=""><span style="color:#D73A49">  for</span><span style="color:#24292E"> (propKey </span><span style="color:#D73A49">in</span><span style="color:#24292E"> nextProps) {</span></span>
+<span data-line=""><span style="color:#D73A49">    var</span><span style="color:#24292E"> nextProp </span><span style="color:#D73A49">=</span><span style="color:#24292E"> nextProps[propKey]</span></span>
+<span data-line=""><span style="color:#D73A49">    var</span><span style="color:#24292E"> lastProp </span><span style="color:#D73A49">=</span><span style="color:#24292E"> lastProps </span><span style="color:#D73A49">!=</span><span style="color:#005CC5"> null</span><span style="color:#D73A49"> ?</span><span style="color:#24292E"> lastProps[propKey] </span><span style="color:#D73A49">:</span><span style="color:#005CC5"> undefined</span></span>
+<span data-line=""><span style="color:#6A737D">    // 更新后没有 或者 不更新 或者 没有该属性 则跳过</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#D73A49">      !</span><span style="color:#24292E">nextProps.</span><span style="color:#6F42C1">hasOwnProperty</span><span style="color:#24292E">(propKey) </span><span style="color:#D73A49">||</span></span>
+<span data-line=""><span style="color:#24292E">      nextProp </span><span style="color:#D73A49">===</span><span style="color:#24292E"> lastProp </span><span style="color:#D73A49">||</span></span>
+<span data-line=""><span style="color:#24292E">      (nextProp </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> null</span><span style="color:#D73A49"> &amp;&amp;</span><span style="color:#24292E"> lastProp </span><span style="color:#D73A49">==</span><span style="color:#005CC5"> null</span><span style="color:#24292E">)</span></span>
+<span data-line=""><span style="color:#24292E">    ) {</span></span>
+<span data-line=""><span style="color:#D73A49">      continue</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">    // 分别处理各个属性</span></span>
+<span data-line=""><span style="color:#D73A49">    if</span><span style="color:#24292E"> (propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> STYLE</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#24292E">      {</span></span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (nextProp) {</span></span>
+<span data-line=""><span style="color:#6A737D">          // Freeze the next style object so that we can assume it won&#x27;t be</span></span>
+<span data-line=""><span style="color:#6A737D">          // mutated. We have already warned for this in the past.</span></span>
+<span data-line=""><span style="color:#24292E">          Object.</span><span style="color:#6F42C1">freeze</span><span style="color:#24292E">(nextProp)</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (lastProp) {</span></span>
+<span data-line=""><span style="color:#6A737D">        // Unset styles on `lastProp` but not on `nextProp`.</span></span>
+<span data-line=""><span style="color:#D73A49">        for</span><span style="color:#24292E"> (styleName </span><span style="color:#D73A49">in</span><span style="color:#24292E"> lastProp) {</span></span>
+<span data-line=""><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#24292E">            lastProp.</span><span style="color:#6F42C1">hasOwnProperty</span><span style="color:#24292E">(styleName) </span><span style="color:#D73A49">&amp;&amp;</span></span>
+<span data-line=""><span style="color:#24292E">            (</span><span style="color:#D73A49">!</span><span style="color:#24292E">nextProp </span><span style="color:#D73A49">||</span><span style="color:#D73A49"> !</span><span style="color:#24292E">nextProp.</span><span style="color:#6F42C1">hasOwnProperty</span><span style="color:#24292E">(styleName))</span></span>
+<span data-line=""><span style="color:#24292E">          ) {</span></span>
+<span data-line=""><span style="color:#D73A49">            if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">styleUpdates) {</span></span>
+<span data-line=""><span style="color:#24292E">              styleUpdates </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {}</span></span>
+<span data-line=""><span style="color:#24292E">            }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">            styleUpdates[styleName] </span><span style="color:#D73A49">=</span><span style="color:#032F62"> &#x27;&#x27;</span></span>
+<span data-line=""><span style="color:#24292E">          }</span></span>
+<span data-line=""><span style="color:#24292E">        } </span><span style="color:#6A737D">// Update styles that changed since `lastProp`.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        for</span><span style="color:#24292E"> (styleName </span><span style="color:#D73A49">in</span><span style="color:#24292E"> nextProp) {</span></span>
+<span data-line=""><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#24292E">            nextProp.</span><span style="color:#6F42C1">hasOwnProperty</span><span style="color:#24292E">(styleName) </span><span style="color:#D73A49">&amp;&amp;</span></span>
+<span data-line=""><span style="color:#24292E">            lastProp[styleName] </span><span style="color:#D73A49">!==</span><span style="color:#24292E"> nextProp[styleName]</span></span>
+<span data-line=""><span style="color:#24292E">          ) {</span></span>
+<span data-line=""><span style="color:#D73A49">            if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">styleUpdates) {</span></span>
+<span data-line=""><span style="color:#24292E">              styleUpdates </span><span style="color:#D73A49">=</span><span style="color:#24292E"> {}</span></span>
+<span data-line=""><span style="color:#24292E">            }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">            styleUpdates[styleName] </span><span style="color:#D73A49">=</span><span style="color:#24292E"> nextProp[styleName]</span></span>
+<span data-line=""><span style="color:#24292E">          }</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""><span style="color:#24292E">      } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">        // Relies on `updateStylesByID` not mutating `styleUpdates`.</span></span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">styleUpdates) {</span></span>
+<span data-line=""><span style="color:#D73A49">          if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">updatePayload) {</span></span>
+<span data-line=""><span style="color:#24292E">            updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> []</span></span>
+<span data-line=""><span style="color:#24292E">          }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">          updatePayload.</span><span style="color:#6F42C1">push</span><span style="color:#24292E">(propKey, styleUpdates)</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">        styleUpdates </span><span style="color:#D73A49">=</span><span style="color:#24292E"> nextProp</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> DANGEROUSLY_SET_INNER_HTML</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> nextHtml </span><span style="color:#D73A49">=</span><span style="color:#24292E"> nextProp </span><span style="color:#D73A49">?</span><span style="color:#24292E"> nextProp[</span><span style="color:#005CC5">HTML$1</span><span style="color:#24292E">] </span><span style="color:#D73A49">:</span><span style="color:#005CC5"> undefined</span></span>
+<span data-line=""><span style="color:#D73A49">      var</span><span style="color:#24292E"> lastHtml </span><span style="color:#D73A49">=</span><span style="color:#24292E"> lastProp </span><span style="color:#D73A49">?</span><span style="color:#24292E"> lastProp[</span><span style="color:#005CC5">HTML$1</span><span style="color:#24292E">] </span><span style="color:#D73A49">:</span><span style="color:#005CC5"> undefined</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (nextHtml </span><span style="color:#D73A49">!=</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (lastHtml </span><span style="color:#D73A49">!==</span><span style="color:#24292E"> nextHtml) {</span></span>
+<span data-line=""><span style="color:#24292E">          ;(updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> updatePayload </span><span style="color:#D73A49">||</span><span style="color:#24292E"> []).</span><span style="color:#6F42C1">push</span><span style="color:#24292E">(propKey, nextHtml)</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> CHILDREN</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">typeof</span><span style="color:#24292E"> nextProp </span><span style="color:#D73A49">===</span><span style="color:#032F62"> &#x27;string&#x27;</span><span style="color:#D73A49"> ||</span><span style="color:#D73A49"> typeof</span><span style="color:#24292E"> nextProp </span><span style="color:#D73A49">===</span><span style="color:#032F62"> &#x27;number&#x27;</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#24292E">        ;(updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> updatePayload </span><span style="color:#D73A49">||</span><span style="color:#24292E"> []).</span><span style="color:#6F42C1">push</span><span style="color:#24292E">(propKey, </span><span style="color:#032F62">&#x27;&#x27;</span><span style="color:#D73A49"> +</span><span style="color:#24292E"> nextProp)</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#24292E">      propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> SUPPRESS_CONTENT_EDITABLE_WARNING</span><span style="color:#D73A49"> ||</span></span>
+<span data-line=""><span style="color:#24292E">      propKey </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> SUPPRESS_HYDRATION_WARNING</span></span>
+<span data-line=""><span style="color:#24292E">    );</span></span>
+<span data-line=""><span style="color:#D73A49">    else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (registrationNameDependencies.</span><span style="color:#6F42C1">hasOwnProperty</span><span style="color:#24292E">(propKey)) {</span></span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (nextProp </span><span style="color:#D73A49">!=</span><span style="color:#005CC5"> null</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#6A737D">        // We eagerly listen to this even though we haven&#x27;t committed yet.</span></span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">typeof</span><span style="color:#24292E"> nextProp </span><span style="color:#D73A49">!==</span><span style="color:#032F62"> &#x27;function&#x27;</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#6F42C1">          warnForInvalidEventListener</span><span style="color:#24292E">(propKey, nextProp)</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">        if</span><span style="color:#24292E"> (propKey </span><span style="color:#D73A49">===</span><span style="color:#032F62"> &#x27;onScroll&#x27;</span><span style="color:#24292E">) {</span></span>
+<span data-line=""><span style="color:#6F42C1">          listenToNonDelegatedEvent</span><span style="color:#24292E">(</span><span style="color:#032F62">&#x27;scroll&#x27;</span><span style="color:#24292E">, domElement)</span></span>
+<span data-line=""><span style="color:#24292E">        }</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">      if</span><span style="color:#24292E"> (</span><span style="color:#D73A49">!</span><span style="color:#24292E">updatePayload </span><span style="color:#D73A49">&amp;&amp;</span><span style="color:#24292E"> lastProp </span><span style="color:#D73A49">!==</span><span style="color:#24292E"> nextProp) {</span></span>
+<span data-line=""><span style="color:#6A737D">        // This is a special case. If any listener updates we need to ensure</span></span>
+<span data-line=""><span style="color:#6A737D">        // that the &quot;current&quot; props pointer gets updated so we need a commit</span></span>
+<span data-line=""><span style="color:#6A737D">        // to update this element.</span></span>
+<span data-line=""><span style="color:#24292E">        updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> []</span></span>
+<span data-line=""><span style="color:#24292E">      }</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#D73A49"> if</span><span style="color:#24292E"> (</span></span>
+<span data-line=""><span style="color:#D73A49">      typeof</span><span style="color:#24292E"> nextProp </span><span style="color:#D73A49">===</span><span style="color:#032F62"> &#x27;object&#x27;</span><span style="color:#D73A49"> &amp;&amp;</span></span>
+<span data-line=""><span style="color:#24292E">      nextProp </span><span style="color:#D73A49">!==</span><span style="color:#005CC5"> null</span><span style="color:#D73A49"> &amp;&amp;</span></span>
+<span data-line=""><span style="color:#24292E">      nextProp.$typeof </span><span style="color:#D73A49">===</span><span style="color:#005CC5"> REACT_OPAQUE_ID_TYPE</span></span>
+<span data-line=""><span style="color:#24292E">    ) {</span></span>
+<span data-line=""><span style="color:#6A737D">      // If we encounter useOpaqueReference&#x27;s opaque object, this means we are hydrating.</span></span>
+<span data-line=""><span style="color:#6A737D">      // In this case, call the opaque object&#x27;s toString function which generates a new client</span></span>
+<span data-line=""><span style="color:#6A737D">      // ID so client and server IDs match and throws to rerender.</span></span>
+<span data-line=""><span style="color:#24292E">      nextProp.</span><span style="color:#6F42C1">toString</span><span style="color:#24292E">()</span></span>
+<span data-line=""><span style="color:#24292E">    } </span><span style="color:#D73A49">else</span><span style="color:#24292E"> {</span></span>
+<span data-line=""><span style="color:#6A737D">      // For any other property we always add it to the queue and then we</span></span>
+<span data-line=""><span style="color:#6A737D">      // filter it out using the allowed property list during the commit.</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#6A737D">      // title属性会进入此处，赋值为[key:,value,key,value...]</span></span>
+<span data-line=""><span style="color:#24292E">      ;(updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> updatePayload </span><span style="color:#D73A49">||</span><span style="color:#24292E"> []).</span><span style="color:#6F42C1">push</span><span style="color:#24292E">(propKey, nextProp)</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  if</span><span style="color:#24292E"> (styleUpdates) {</span></span>
+<span data-line=""><span style="color:#24292E">    {</span></span>
+<span data-line=""><span style="color:#6F42C1">      validateShorthandPropertyCollisionInDev</span><span style="color:#24292E">(styleUpdates, nextProps[</span><span style="color:#005CC5">STYLE</span><span style="color:#24292E">])</span></span>
+<span data-line=""><span style="color:#24292E">    }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#24292E">    ;(updatePayload </span><span style="color:#D73A49">=</span><span style="color:#24292E"> updatePayload </span><span style="color:#D73A49">||</span><span style="color:#24292E"> []).</span><span style="color:#6F42C1">push</span><span style="color:#24292E">(</span><span style="color:#005CC5">STYLE</span><span style="color:#24292E">, styleUpdates)</span></span>
+<span data-line=""><span style="color:#24292E">  }</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#D73A49">  return</span><span style="color:#24292E"> updatePayload</span></span>
+<span data-line=""><span style="color:#24292E">} </span><span style="color:#6A737D">// Apply the diff.</span></span></code></pre></figure></div><footer class="mt-[32px]"><div class="border-divider flex justify-between border-t pt-[24px]"><div class="w-[calc(50%-4px)]"><a class="cursor-pointer border-divider hover:border-brand group block h-full w-full rounded-[8px] border px-[16px] py-[8px] transition-colors duration-300"><div class="text-text-2 text-[12px] font-[500] leading-[20px]">上一页</div><div class=" text-text-2 group-hover:text-brand overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-[500] leading-[20px] transition-colors duration-300">update阶段的beginWork</div></a></div><div class="w-[calc(50%-4px)]"><a class="cursor-pointer border-divider hover:border-brand group block h-full w-full rounded-[8px] border px-[16px] py-[8px] transition-colors duration-300"><div class="text-text-2 text-[12px] font-[500] leading-[20px]">下一页</div><div class=" text-text-2 group-hover:text-brand overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-[500] leading-[20px] transition-colors duration-300">进入commit()阶段</div></a></div></div></footer></div></div><aside class="w-toc full:flex sticky top-[calc(theme(spacing.nav)+48px)] hidden h-full flex-col"><div class="border-divider pc:border-l px-[16px] font-[500]"><div class="pc:block bg-brand absolute left-0 hidden h-[18px] w-px transition-[opacity,top] duration-300" style="top:33px;opacity:0"></div><div class="text-[14px] font-[600] leading-[28px]">本页目录</div><div><div><a href="#completework" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">completeWork</a></div><div><a href="#updatehostcomponent1" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">updateHostComponent$1</a></div><div><a href="#prepareupdate" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:1rem">prepareUpdate</a></div><div><a href="#diffproperties" class="text-text-2 text-hover block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] leading-[28px]" style="padding-left:0rem">diffProperties</a></div></div></div></aside></div></div></div>
+  
+    <script type="module" src="/client-entry.js"></script>
+    </body>
+    
+</html>
