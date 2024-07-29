@@ -1,10 +1,12 @@
 {
   "scripts": {
-    "dev": "hhxpress dev site",
-    "build": "hhxpress build site",
-    "preview": "hhxpress preview site"
+    "dev": "zeropress",
+    "build": "zeropress build",
+    "serve": "zeropress build && npx serve ./dist"
   },
   "dependencies": {
-    "hhxpress": "^0.1.53"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zeropress": "^0.0.10"
   }
 }

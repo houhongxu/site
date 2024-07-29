@@ -1,6 +1,5 @@
 ---
 pageType: home
-
 hero:
   name: HHX的博客
   tagline: 基于 SSG 框架 HHXPRESS
