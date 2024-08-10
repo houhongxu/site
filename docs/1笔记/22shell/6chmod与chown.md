@@ -67,7 +67,7 @@ drwxr-xr-x
 
 所以 常用的 `chmod 777 nginx` 即 rwx、rwx、rwx
 
-也可以使用可读命令`chmod +rwx nginx`
+也可以使用可读命令`chmod a+rwx nginx`
 
 命令帮助为 `$ chmod [ugoa...][[+-=][perms...]...]`
 
