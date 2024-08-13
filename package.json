@@ -2,11 +2,11 @@
   "scripts": {
     "dev": "zeropress",
     "build": "zeropress build",
-    "serve": "zeropress build && npx serve ./dist"
+    "serve": "zeropress build && npx serve ./dist -l 9999"
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "zeropress": "^0.0.27"
+    "zeropress": "^0.0.30"
   }
 }
