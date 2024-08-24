@@ -12,6 +12,10 @@
 
 - useRequest 加 refresh 函数
 
+- 合成 ,transition 动画, nprogress
+
+- image 压缩, web worker, Offscreen canvas
+
 ## webpack4-5
 
 Webpack5 新特性

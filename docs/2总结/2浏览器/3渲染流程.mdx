@@ -1,0 +1,102 @@
+# 渲染流程
+
+静态资源服务器的 html、js、css 文件在浏览器请求到浏览器后的渲染过程
+
+## html
+
+浏览器无法直接理解 html，浏览器只能理解和操作 dom
+
+所以首先要将 html 构建为 dom 树
+
+内容其实和 html 看起来差不多
+
+但是是对象形式的树结构
+
+控制台输入`document`即可看到
+
+## css
+
+### 计算
+
+css 同理需要转换 styleSheets，转换标准格式，计算 dom 对应的样式
+
+css 有三种形式
+
+- 通过 link 引用的外部 CSS 文件，ownerNode=link
+- `<style>` 标记内的 CSS，ownerNode=style
+- 元素的 style 属性内嵌的，CSS jsx 在 js 文件中
+
+控制台输入`document.styleSheets`即可看到
+
+### 布局
+
+计算 dom 中可见 dom 的位置
+
+首先得单独创建可见 dom 布局树
+
+然后计算 dom 位置
+
+### 分层
+
+layers
+
+1.具有层叠上下文的属性的 dom 都会分出一层
+
+比如 `position:fixed` `z-index:2` `filter:blue(5px)` `opacity:0.5`
+
+2.溢出裁剪的也会分层，滚动条单独一层
+
+### 绘制
+
+绘制会通过很多绘制指令
+
+然后通过渲染引擎的合成线程完成
+
+所以如 transition 等合成动画就不会被主线程阻塞
+
+例如下面 ball1 就不会被 js 死循环影响
+
+```
+  .ball1 {
+    animation: move1 1s alternate infinite ease-in-out;
+  }
+  .ball2 {
+    position: fixed;
+    left: 0;
+    animation: move2 1s alternate infinite ease-in-out;
+  }
+  @keyframes move1 {
+    to {
+      transform: translate(100px);
+    }
+  }
+  @keyframes move2 {
+    to {
+      left: 100px;
+    }
+  }
+```
+
+#### 合成
+
+合成线程会先将图层划分为图块
+
+在 viewport 中的图块会优先生成位图
+
+位图就是像素为基础的图像
+
+栅格化就是生成位图的过程
+
+### 重绘 重排 合成
+
+重绘就是重新计算 styleSheets，如 background 的属性
+
+重排就是重新进行布局和分层，如 left 属性
+
+合成就是重新合成，如 tansition 属性
+
+## js
+
+解析 html 时遇到 js 脚本则先执行 js
+
+执行上下文见 从 V8 执行上下文说起
