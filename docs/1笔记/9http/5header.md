@@ -20,4 +20,4 @@
 
 5. 通过 curl 与 httpbin 测试请求头部
 
-   ![z-5-1](/img/http/2/z-5-1.jpg)
+   ![5](./img/5.jpg)

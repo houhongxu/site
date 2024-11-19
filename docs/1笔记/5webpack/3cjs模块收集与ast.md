@@ -8,7 +8,7 @@
 
 2. 在 AST Explore 尝试 Javascript/CSS 解析，并观察其语法树
 
-   ![z-3-1](/img/note/5/z-3-1.jpg)
+   ![z-3-1](./img/z-3-1.jpg)
    如图是 require 的语法树，4.会用到
 
 3. 如何根据入口文件搜索出所有需要打包的模块

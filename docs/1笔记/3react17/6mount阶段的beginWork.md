@@ -4,7 +4,7 @@
 lane 关键字 相关的内容和调度相关，暂时跳过
 :::
 
-![1](/img/note/7/1.jpg)
+![1](./img/1.jpg)
 
 :::note
 fiberRoot 避免混淆大写为 FiberRoot

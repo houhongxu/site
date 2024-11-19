@@ -2,7 +2,7 @@
 
 1. 使用 Node.js 写一段服务器代码测试 age/max-age
 
-   ![z-14-1](/img/http/3/z-14-1.jpg)
+   ![14](./img/14.jpg)
 
 2. age/max-age 的作用是什么
 

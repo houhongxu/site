@@ -1,6 +1,6 @@
 # 流程
 
-![1](/img/note/7/1.jpg)
+![1](./img/1.jpg)
 
 > 标签<...>调用 beginWork 标签</...>调用 completeWork
 
@@ -52,14 +52,14 @@ render 阶段开始于 performSyncWorkOnRoot 或 performConcurrentWorkOnRoot 方
 // performSyncWorkOnRoot会调用该方法
 function workLoopSync() {
   while (workInProgress !== null) {
-    performUnitOfWork(workInProgress)
+    performUnitOfWork(workInProgress);
   }
 }
 
 // performConcurrentWorkOnRoot会调用该方法
 function workLoopConcurrent() {
   while (workInProgress !== null && !shouldYield()) {
-    performUnitOfWork(workInProgress)
+    performUnitOfWork(workInProgress);
   }
 }
 ```
@@ -75,13 +75,13 @@ function performUnitOfWork(fiber) {
   // 执行beginWork
 
   if (fiber.child) {
-    performUnitOfWork(fiber.child)
+    performUnitOfWork(fiber.child);
   }
 
   // 执行completeWork
 
   if (fiber.sibling) {
-    performUnitOfWork(fiber.sibling)
+    performUnitOfWork(fiber.sibling);
   }
 }
 ```

@@ -5,7 +5,7 @@
    见[代码中的注释](https://github.com/903040380/Xwebpack/tree/master/code-spliting/example/jsonp)
 
 2. 将自己项目取消代码压缩进行打包，观察其打包后的代码骨架
-   ![z-7-1](/img/note/5/z-7-1.jpg)
+   ![z-7-1](./img/z-7-1.jpg)
 
 3. 在 webpack 中如何实现 code spliting
 
@@ -13,16 +13,16 @@
 
 4. 在 webpack 中，加载 chunk 脚本的 JSONP Callback 如何实现
 
-   ![z-7-2](/img/note/5/z-7-2.jpg)
+   ![z-7-2](./img/z-7-2.jpg)
 
 5. 当 output.chunkLoading 配置为 import 时，分析其源码
 
-   ![z-7-3](/img/note/5/z-7-3.jpg)
+   ![z-7-3](./img/z-7-3.jpg)
 
    `__webpack_require__.f.j`不同
    `__webpack_require__.l`不需要了
 
-   ![z-7-4](/img/note/5/z-7-4.jpg)
+   ![z-7-4](./img/z-7-4.jpg)
 
    jsonp 不需要了，用 installChunck 替代
 

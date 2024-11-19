@@ -8,7 +8,7 @@
 
 2. webpack 的模块加载器是如何实现的
 
-   ![z-2-1](/img/note/5/z-2-1.jpg)
+   ![z-2-1](./img/z-2-1.jpg)
    首先定义全局缓存对象`__webpack_module_cache__`
    然后定义打包器函数`__webpack_require__(moduleId){}`
    函数中：
@@ -35,8 +35,8 @@
 
 6. 如何理解 webpack 运行时代码最后是 `__webpack_require__(0)`
 
-   ![z-2-2](/img/note/5/z-2-2.jpg)
-   ![z-2-3](/img/note/5/z-2-3.jpg)
+   ![z-2-2](./img/z-2-2.jpg)
+   ![z-2-3](./img/z-2-3.jpg)
    执行打包后的 js 然后打印`__webpack_modules__`发现 0 的位置是空的
    所以其实 0 只是一个预留位置
    解释成是储存入口模块可能更容易理解

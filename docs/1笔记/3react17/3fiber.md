@@ -12,44 +12,44 @@ function FiberNode(
   tag: WorkTag,
   pendingProps: mixed,
   key: null | string,
-  mode: TypeOfMode,
+  mode: TypeOfMode
 ) {
   // 作为静态数据结构的属性
-  this.tag = tag
-  this.key = key
-  this.elementType = null
-  this.type = null
-  this.stateNode = null
+  this.tag = tag;
+  this.key = key;
+  this.elementType = null;
+  this.type = null;
+  this.stateNode = null;
 
   // 用于连接其他Fiber节点形成Fiber树
-  this.return = null
-  this.child = null
-  this.sibling = null
-  this.index = 0
+  this.return = null;
+  this.child = null;
+  this.sibling = null;
+  this.index = 0;
 
-  this.ref = null
+  this.ref = null;
 
   // 作为动态的工作单元的属性
-  this.pendingProps = pendingProps
-  this.memoizedProps = null
-  this.updateQueue = null
-  this.memoizedState = null
-  this.dependencies = null
+  this.pendingProps = pendingProps;
+  this.memoizedProps = null;
+  this.updateQueue = null;
+  this.memoizedState = null;
+  this.dependencies = null;
 
-  this.mode = mode
+  this.mode = mode;
 
-  this.effectTag = NoEffect
-  this.nextEffect = null
+  this.effectTag = NoEffect;
+  this.nextEffect = null;
 
-  this.firstEffect = null
-  this.lastEffect = null
+  this.firstEffect = null;
+  this.lastEffect = null;
 
   // 调度优先级相关
-  this.lanes = NoLanes
-  this.childLanes = NoLanes
+  this.lanes = NoLanes;
+  this.childLanes = NoLanes;
 
   // 指向该fiber在另一次更新时对应的fiber
-  this.alternate = null
+  this.alternate = null;
 }
 ```
 
@@ -57,50 +57,50 @@ function FiberNode(
 
 ```js
 // 指向父级Fiber节点
-this.return = null
+this.return = null;
 // 指向子Fiber节点
-this.child = null
+this.child = null;
 // 指向右边第一个兄弟Fiber节点
-this.sibling = null
+this.sibling = null;
 ```
 
 ### 静态数据结构
 
 ```js
 // Fiber对应组件的类型 Function/Class/Host...
-this.tag = tag
+this.tag = tag;
 // key属性
-this.key = key
+this.key = key;
 // 大部分情况同type，某些情况不同，比如FunctionComponent使用React.memo包裹
-this.elementType = null
+this.elementType = null;
 // 对于 FunctionComponent，指函数本身，对于ClassComponent，指class，对于HostComponent，指DOM节点tagName
-this.type = null
+this.type = null;
 // Fiber对应的真实DOM节点
-this.stateNode = null
+this.stateNode = null;
 ```
 
 ### 动态工作单元
 
 ```js
 // 保存本次更新造成的状态改变相关信息
-this.pendingProps = pendingProps
-this.memoizedProps = null
-this.updateQueue = null
-this.memoizedState = null
-this.dependencies = null
+this.pendingProps = pendingProps;
+this.memoizedProps = null;
+this.updateQueue = null;
+this.memoizedState = null;
+this.dependencies = null;
 
-this.mode = mode
+this.mode = mode;
 
 // 保存本次更新会造成的DOM操作
-this.effectTag = NoEffect
-this.nextEffect = null
+this.effectTag = NoEffect;
+this.nextEffect = null;
 
-this.firstEffect = null
-this.lastEffect = null
+this.firstEffect = null;
+this.lastEffect = null;
 
 // 调度优先级相关
-this.lanes = NoLanes
-this.childLanes = NoLanes
+this.lanes = NoLanes;
+this.childLanes = NoLanes;
 ```
 
 ## 双缓存
@@ -114,11 +114,11 @@ React 应用的根节点通过使 current 指针在不同 Fiber 树的 rootFiber
 ### mount
 
 ```js
-const root = document.getElementById('root')
-ReactDOM.render(<App />, root)
+const root = document.getElementById("root");
+ReactDOM.render(<App />, root);
 ```
 
-![1](/img/note/7/1.jpg)
+![1](./img/1.jpg)
 
 1. 首次执行 ReactDOM.render 会创建 fiberRootNode（源码中叫 **fiberRoot**，避免混淆大写为 FiberRoot）和 rootFiber。
 
@@ -128,7 +128,7 @@ ReactDOM.render(<App />, root)
 
    fiberRootNode 的 current 会指向当前页面上已渲染内容对应 Fiber 树，即 current Fiber 树。
 
-   ![2](/img/note/7/2.jpg)
+   ![2](./img/2.jpg)
 
    `fiberRootNode.current = rootFiber`
 
@@ -136,18 +136,18 @@ ReactDOM.render(<App />, root)
 
    在构建 workInProgress Fiber 树时会尝试复用 current Fiber 树中已有的 Fiber 节点内的属性，**在首屏渲染时只有 rootFiber 存在对应的 current fiber**（即 rootFiber.alternate）。
 
-   ![3](/img/note/7/3.jpg)
+   ![3](./img/3.jpg)
 
 3. 图中右侧已构建完的 workInProgress Fiber 树在 commit()阶段渲染到页面。
    此时 DOM 更新为右侧树对应的样子。
 
    fiberRootNode 的 current 指针指向 workInProgress Fiber 树使其变为 current Fiber 树。
-   ![4](/img/note/7/4.jpg)
+   ![4](./img/4.jpg)
 
 ### update
 
 1. 接下来我们点击 p 节点触发状态改变，这会开启一次新的 render 阶段并构建一棵新的 workInProgress Fiber 树。
-   ![5](/img/note/7/5.jpg)
+   ![5](./img/5.jpg)
    和 mount 时一样，workInProgress fiber 的创建可以复用 current Fiber 树对应的节点数据,复用的依据就是 **Diff 算法**。
 
 2. workInProgress Fiber 树在 render 阶段完成构建后进入 commit 阶段渲染到页面上。渲染完毕后，workInProgress Fiber 树变为 current Fiber 树。

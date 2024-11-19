@@ -18,15 +18,15 @@
 
 ```ts
 function Dog(name, age) {
-  this.name = name
-  this.age = age
+  this.name = name;
+  this.age = age;
 }
 
-console.log(Dog.prototype)
-console.log(Dog.prototype.constructor)
+console.log(Dog.prototype);
+console.log(Dog.prototype.constructor);
 ```
 
-![1](/img/interview/3/2-1.jpg)
+![1](./img/2-1.jpg)
 
 原型对象可以通过`Dog.prototype`访问
 函数本身可以通过`Dog.prototype.constructor`访问
@@ -57,7 +57,7 @@ new 构造函数会返回一个对象，就叫实例
 
 如：
 
-![2](/img/interview/3/2-2.jpg)
+![2](./img/2-2.jpg)
 
 这就是原型链
 
@@ -73,7 +73,7 @@ new 构造函数会返回一个对象，就叫实例
 
 如：
 
-![3](/img/interview/3/2-3.jpg)
+![3](./img/2-3.jpg)
 
 在控制台就可以看到 dog 的`[[Prototype]]`属性
 
@@ -88,11 +88,11 @@ new 构造函数会返回一个对象，就叫实例
 
 ```ts
 Dog.prototype.eat = function () {
-  console.log('肉骨头真好吃')
-}
+  console.log("肉骨头真好吃");
+};
 ```
 
-![4](/img/interview/3/2-4.jpg)
+![4](./img/2-4.jpg)
 
 > 原型对象中 constructor 链接构造函数，这样通过实例也就可以知道是谁创建了它`dog.constructor`
 
@@ -109,8 +109,8 @@ Object.create(proto, [descriptors])可以利用给定的 proto 作为 `__proto__
 ```js
 let clone = Object.create(
   Object.getPrototypeOf(obj),
-  Object.getOwnPropertyDescriptors(obj),
-)
+  Object.getOwnPropertyDescriptors(obj)
+);
 ```
 
 ## 参考资料
