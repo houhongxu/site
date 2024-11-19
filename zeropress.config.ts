@@ -18,6 +18,12 @@ const config: UserConfig = {
         link: "https://github.com/houhongxu/hhxpress",
       },
     ],
+    lastUpdated: {},
+    editLink: {
+      pattern:
+        "https://github.com/houhongxu/zeropress/edit/master/apps/examples/docs/:path",
+      text: "编辑",
+    },
   },
 };
 
