@@ -20,8 +20,7 @@ const config: UserConfig = {
     ],
     lastUpdated: {},
     editLink: {
-      pattern:
-        "https://github.com/houhongxu/zeropress/edit/master/apps/examples/docs/:path",
+      pattern: "https://github.com/houhongxu/site/edit/master/docs/:path",
       text: "编辑",
     },
   },
