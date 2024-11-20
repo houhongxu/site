@@ -12,8 +12,8 @@ dependencies:
     specifier: ^18.3.1
     version: 18.3.1(react@18.3.1)
   zeropress:
-    specifier: ^0.0.33
-    version: 0.0.33(react-dom@18.3.1)(react@18.3.1)(rollup@4.27.3)
+    specifier: ^0.0.34
+    version: 0.0.34(react-dom@18.3.1)(react@18.3.1)(rollup@4.27.3)
 
 packages:
 
@@ -1361,19 +1361,19 @@ packages:
     dependencies:
       '@types/hast': 3.0.4
       devlop: 1.1.0
-      hast-util-from-parse5: 8.0.1
+      hast-util-from-parse5: 8.0.2
       parse5: 7.2.1
       vfile: 6.0.3
       vfile-message: 4.0.2
     dev: false
 
-  /hast-util-from-parse5@8.0.1:
-    resolution: {integrity: sha512-Er/Iixbc7IEa7r/XLtuG52zoqn/b3Xng/w6aZQ0xGVxzhw5xUFxcRqdPzP6yFi/4HBYRaifaI5fQ1RH8n0ZeOQ==}
+  /hast-util-from-parse5@8.0.2:
+    resolution: {integrity: sha512-SfMzfdAi/zAoZ1KkFEyyeXBn7u/ShQrfd675ZEE9M3qj+PMFX05xubzRyF76CCSJu8au9jgVxDV1+okFvgZU4A==}
     dependencies:
       '@types/hast': 3.0.4
       '@types/unist': 3.0.3
       devlop: 1.1.0
-      hastscript: 8.0.0
+      hastscript: 9.0.0
       property-information: 6.5.0
       vfile: 6.0.3
       vfile-location: 5.0.3
@@ -1471,8 +1471,8 @@ packages:
       '@types/hast': 3.0.4
     dev: false
 
-  /hastscript@8.0.0:
-    resolution: {integrity: sha512-dMOtzCEd3ABUeSIISmrETiKuyydk1w0pa+gE/uormcTpSYuaNJPbX1NU3JLyscSLjwAQM8bWMhhIlnCqnRvDTw==}
+  /hastscript@9.0.0:
+    resolution: {integrity: sha512-jzaLBGavEDKHrc5EfFImKN7nZKKBdSLIdGvCwDZ9TfzbF2ffXiov8CKE445L2Z1Ek2t/m4SKQ2j6Ipv7NyUolw==}
     dependencies:
       '@types/hast': 3.0.4
       comma-separated-tokens: 2.0.3
@@ -1873,7 +1873,7 @@ packages:
       micromark-util-html-tag-name: 2.0.1
       micromark-util-normalize-identifier: 2.0.1
       micromark-util-resolve-all: 2.0.1
-      micromark-util-subtokenize: 2.0.2
+      micromark-util-subtokenize: 2.0.3
       micromark-util-symbol: 2.0.1
       micromark-util-types: 2.0.1
     dev: false
@@ -2161,8 +2161,8 @@ packages:
       micromark-util-symbol: 2.0.1
     dev: false
 
-  /micromark-util-subtokenize@2.0.2:
-    resolution: {integrity: sha512-xKxhkB62vwHUuuxHe9Xqty3UaAsizV2YKq5OV344u3hFBbf8zIYrhYOWhAQb94MtMPkjTOzzjJ/hid9/dR5vFA==}
+  /micromark-util-subtokenize@2.0.3:
+    resolution: {integrity: sha512-VXJJuNxYWSoYL6AJ6OQECCFGhIU2GGHMw8tahogePBrjkG8aCCas3ibkp7RnVOSTClg2is05/R7maAhF1XyQMg==}
     dependencies:
       devlop: 1.1.0
       micromark-util-chunked: 2.0.1
@@ -2195,7 +2195,7 @@ packages:
       micromark-util-normalize-identifier: 2.0.1
       micromark-util-resolve-all: 2.0.1
       micromark-util-sanitize-uri: 2.0.1
-      micromark-util-subtokenize: 2.0.2
+      micromark-util-subtokenize: 2.0.3
       micromark-util-symbol: 2.0.1
       micromark-util-types: 2.0.1
     transitivePeerDependencies:
@@ -2382,7 +2382,7 @@ packages:
     dependencies:
       lilconfig: 3.1.2
       postcss: 8.4.49
-      yaml: 2.6.0
+      yaml: 2.6.1
     dev: false
 
   /postcss-nested@6.2.0(postcss@8.4.49):
@@ -2637,7 +2637,7 @@ packages:
       estree-util-value-to-estree: 3.2.1
       toml: 3.0.0
       unified: 11.0.5
-      yaml: 2.6.0
+      yaml: 2.6.1
     dev: false
 
   /remark-mdx@3.1.0:
@@ -3112,14 +3112,14 @@ packages:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
     dev: false
 
-  /yaml@2.6.0:
-    resolution: {integrity: sha512-a6ae//JvKDEra2kdi1qzCyrJW/WZCgFi8ydDV+eXExl95t+5R+ijnqHJbz9tmMh8FUjx3iv2fCQ4dclAQlO2UQ==}
+  /yaml@2.6.1:
+    resolution: {integrity: sha512-7r0XPzioN/Q9kXBro/XPnA6kznR73DHq+GXh5ON7ZozRO6aMjbmiBuKste2wslTFkC5d1dw0GooOCepZXJ2SAg==}
     engines: {node: '>= 14'}
     hasBin: true
     dev: false
 
-  /zeropress@0.0.33(react-dom@18.3.1)(react@18.3.1)(rollup@4.27.3):
-    resolution: {integrity: sha512-ZEj/FMTG07CRYKF8DkmOBHlLMCoIk6rwqrUfE1tsI+ICeUGrDjj6F9R5yj1TUz9257umy/GXBt5sMn2WYz7Hvg==}
+  /zeropress@0.0.34(react-dom@18.3.1)(react@18.3.1)(rollup@4.27.3):
+    resolution: {integrity: sha512-Z/rj1rkY1ob7sUdcNwjmgo8RacQ9Gols85qNvRF7t14g4nGUug2CuFR3ZiYkmkiilWJ/oWfeKtyQTkivLAZHCg==}
     hasBin: true
     peerDependencies:
       react: '>=18.0.0 <19.0.0'
