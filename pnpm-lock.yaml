@@ -12,8 +12,8 @@ dependencies:
     specifier: ^18.3.1
     version: 18.3.1(react@18.3.1)
   zeropress:
-    specifier: ^0.0.34
-    version: 0.0.34(react-dom@18.3.1)(react@18.3.1)(rollup@4.27.3)
+    specifier: ^0.0.35
+    version: 0.0.35(react-dom@18.3.1)(react@18.3.1)(rollup@4.27.3)
 
 packages:
 
@@ -3118,8 +3118,8 @@ packages:
     hasBin: true
     dev: false
 
-  /zeropress@0.0.34(react-dom@18.3.1)(react@18.3.1)(rollup@4.27.3):
-    resolution: {integrity: sha512-Z/rj1rkY1ob7sUdcNwjmgo8RacQ9Gols85qNvRF7t14g4nGUug2CuFR3ZiYkmkiilWJ/oWfeKtyQTkivLAZHCg==}
+  /zeropress@0.0.35(react-dom@18.3.1)(react@18.3.1)(rollup@4.27.3):
+    resolution: {integrity: sha512-noI2nZXvmjcyIKAG29H33uaY9zgQfQ0C+EOKxPbyuV518twIkmJEtVlEwDWweDMIuqx1C79U0sMRIDNhWWLVRw==}
     hasBin: true
     peerDependencies:
       react: '>=18.0.0 <19.0.0'
