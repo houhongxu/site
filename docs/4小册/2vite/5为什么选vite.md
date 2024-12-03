@@ -12,9 +12,9 @@
 
 ## 模块化
 
-使用 es 语法的模块规范 esm
+首先是模块化
 
-狠狠战未来
+vite 基于 模块规范 esm，狠狠战未来
 
 vite 就是基于浏览器已经实现了 esm 支持来设计
 
@@ -22,7 +22,11 @@ vite 就是基于浏览器已经实现了 esm 支持来设计
 
 实现 no bundle 的设计
 
+具体的模块化支持情况我们将在下一篇来一一验证
+
 ## dev server
+
+todo
 
 仅更新浏览器发起请求的模块
 
@@ -34,6 +38,8 @@ vite 就是基于浏览器已经实现了 esm 支持来设计
 
 ## 兼容性
 
+todo
+
 支持使用 esbuild swc babel postcss 等
 
 默认兼容到 es6 Chrome >=87
@@ -41,6 +47,8 @@ vite 就是基于浏览器已经实现了 esm 支持来设计
 兼容性可自定义
 
 ## build
+
+todo
 
 生产环境使用 ESM 时，大量的请求即使使用 HTTP2 也会加载缓慢，所以仍然需要打包
 
@@ -50,6 +58,8 @@ vite 就是基于浏览器已经实现了 esm 支持来设计
 
 ## 微前端
 
+todo
+
 qiankun 为例，互相都没有官方支持
 
 有社区插件可以支持 qiankun
@@ -57,5 +67,7 @@ qiankun 为例，互相都没有官方支持
 慎用
 
 ## 模块联邦
+
+todo
 
 module federation v2 官方支持 vite 插件

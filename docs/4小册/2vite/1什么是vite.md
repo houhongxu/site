@@ -14,24 +14,26 @@
 
 而 web 开发所需要的的脚手架工具，必不可少的功能就是 dev server，包括它的 page reload 和 hmr 功能
 
-所以，我们是不是需要一个基于 es6 的 web 开发构建工具，虽然优势不太明显
+所以，我们是不是需要一个基于 es6 的 web 开发构建工具，虽然效率提升不太明显
 
 另一方面，webpack 的 bundle 概念，使每次 dev server 更新都需要 bundle 一次，速度一直比较缓慢
 
 这时，浏览器原生支持了 esm，可以将 dev sever 的模块解析交给浏览器处理，no bundle 仅编译模块即可，大大加速
 
-那么，我们是不是也需要一个基于 es6 no bundle 的 web 开发工具，优势比较明显了
+那么，我们是不是也需要一个基于 es6 no bundle 的 web 开发工具，这样效率提升就比较明显了
 
-急，很急，急需大佬
+急，很急，急需大佬写一个
 
-vite 就出现了，基于 rollup 的生态, 提供了 no bundle 的 dev server 和生态完善的 build
+vite 就这样出现了，基于 rollup 的生态, 提供了 no bundle 的 dev server 和生态完善的 build
 
-别急
+别急，还没完，这时还流行开来一个开挂一样的构建工具，不是使用 js，而是使用 go 语言开发的工具 esbuild
 
-还没完，这时还有一种开挂构建工具，使用 go 语言开发的工具 esbuild，没别的，就是快，仅支持到 es6
+没别的，就是快，虽然仅支持到 es6
 
-no bundle+es6，那不正好了，代码转换、代码压缩、代码丑化等，全交给 esbuild
+但是 no bundle 加 es6，那不正好了，代码转换、代码压缩、代码丑化等，耗时的编译全交给 esbuild
 
 vite 的完全体就诞生了
 
 双引擎架构，极速的 dev server，生态完善的 build
+
+一代真神
