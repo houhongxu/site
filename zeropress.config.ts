@@ -1,8 +1,8 @@
 import { UserConfig } from "zeropress";
 
 const config: UserConfig = {
-  title: "HHX的博客",
-  description: "点击github图标一键部署同款博客",
+  title: "HHX的网站",
+  description: "同款网站仓库一键部署",
   themeConfig: {
     nav: [
       {

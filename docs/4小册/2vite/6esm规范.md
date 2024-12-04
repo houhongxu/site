@@ -209,9 +209,9 @@ esm > cjs 是少见的需求，哪怕 webpack 处理代码转为 webpackRequire 
 
 vite 可能不太考虑这种场景，所以只有 srr 打开时可以转化
 
-那么是不是和 esm > cjs 一样基于 esbuild 呢
+那么是不是和 cjs > esm 一样基于 esbuild 呢
 
-不是，这个反而而是基于 rollup 转换，可以看产物对比
+不是，这个反而是基于 rollup 转换，可以看产物对比
 
 vite
 
