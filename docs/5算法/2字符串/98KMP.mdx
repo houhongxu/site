@@ -6,31 +6,33 @@
 
 就是暴力循环的解法
 
-将文本串遍历的同时找到与模式串第一个字符相等的字符，开始尝试匹配
+文本串就是主串，模式串就是子串
 
-遍历模式串进行匹配，如果遍历完了都相等就是匹配成功，如果有不相等则匹配失败
+将主串遍历的同时找到与子串第一个字符相等的字符，开始尝试匹配
 
-失败后继续遍历文本串，下次匹配则从模式串的开头开始，这就是回溯到 0 下标
+遍历子串进行匹配，如果遍历完了都相等就是匹配成功，如果有不相等则匹配失败
 
-而文本串也没有随模式串遍历一起遍历，也是属于回溯了
+失败后继续遍历主串，下次匹配则从子串的开头开始，这就是回溯到 0 下标
 
-KMP 算法就是解决这个模式串回溯长度的问题，并且还加快了遍历文本串，不用等待模式串遍历，一起遍历
+而主串也没有随子串遍历一起遍历，只向后移动一位，相比 KMP 也是属于回溯了
+
+KMP 算法就是解决这个子串回溯长度的问题，并且还加快了遍历主串，不用等待子串遍历，一起遍历
 
 ```ts
 function strStr(haystack: string, needle: string): number {
   for (let i = 0; i < haystack.length; i++) {
     if (haystack[i] === needle[0]) {
-      let j = 0
+      let j = 0;
 
       for (; j < needle.length && haystack[i + j] === needle[j]; j++) {}
 
       if (j === needle.length) {
-        return i
+        return i;
       }
     }
   }
 
-  return -1
+  return -1;
 }
 ```
 
@@ -38,18 +40,18 @@ function strStr(haystack: string, needle: string): number {
 
 解决了两个回溯的问题：
 
-- 模式串回溯问题：通过提前准备的 next 数组进行回溯而不是直接回溯到 0
-- 文本串回溯问题：模式串与文本串一起遍历提高效率
+- 子串回溯问题：通过提前准备的 next 数组进行回溯而不是直接回溯到 0
+- 主串回溯问题：子串与主串一起遍历提高效率
 
 难点就在 next 数组的准备上
 
 ## next 数组
 
-next 数组就是最长相同前后缀表，也可以叫前缀和表
+next 数组就是最长相同前后缀表
 
-next 数组是用来回退的，它记录了模式串与文本串不匹配的时候，模式串应该从哪里开始重新匹配
+next 数组是用来回退的，它记录了子串与主串不匹配的时候，子串应该从哪里开始重新匹配
 
-next 数组的下标就是当前模式串字符下标
+next 数组的下标就是当前子串字符下标
 
 next 数组的值就是当前字符串(包括自己)的最长相同前后缀值
 
@@ -62,17 +64,31 @@ next 数组的值就是当前字符串(包括自己)的最长相同前后缀值
 
 最长相同前后缀就是前缀后缀相同的情况下，最长的前缀/后缀
 
+如 aa
+
+最长相同前后缀就是 a
+
+如 aab
+
+最长相同前后缀就是 无
+
+如 aaba
+
+最长相同前后缀就是 a
+
 如 aabaa
 
 最长相同前后缀就是 aa
 
 如 aabaaab
 
-最长相同前后缀表就是`[0,1,0,1,2,2,3]`
+最长相同前后缀就是 aab
+
+最长相同前后缀表就是其长度数组 `[0,1,0,1,2,2,3]`
 
 ### 使用 next 数组匹配
 
-如果匹配文本串 aabaabaafa，模式串 aabaaf
+如果匹配主串 aabaabaafa，子串 aabaaf
 
 对应 next 是`[0,1,0,1,2,0]`
 
@@ -90,11 +106,11 @@ aabaabaafa
 
 你看，`aab[aa]baafa`括号中的 aa 在匹配时匹配的是`aab[aa]f`中括号的 aa
 
-因为括号中的 `aab[aa]f` 为 f 前面字符串的后缀，其具有相同前缀`[aa]baaf`
+因为括号中的 `aab[aa]f` 为 f 前面字符串`aab[aa]`的后缀，其具有相同前缀 aa
 
-那不就是也匹配过`[aa]baaf`中的 aa 了吗
+所以`[aa]baa`的前缀 aa 就相当于匹配过了
 
-那自然从 b 开始了
+那自然从 b 开始了就可以了
 
 怎么在 next 数组中找到 b 的位置呢
 
@@ -104,123 +120,125 @@ aabaa 字符串对应的值为 2
 
 f 在 fIndex-1 位置找是因为 f 找的是 aabaa 的对应前缀和
 
-2 再回到`aabaaf`中就是 b 了
+2 作为下下标， 在`aabaaf`中就是 b 了
 
 ### 实现 next 数组
 
 ```ts
 function getNext(needle: string) {
-  let next = [0]
+  let next = [0];
   // j为前缀尾部下标，next数组内的值本质就是j这个前缀下标
-  let j = 0
+  let j = 0;
 
-  // i为后缀尾部下标，且遍历模式串
+  // i为后缀尾部下标，且遍历子串
   for (let i = 1; i < needle.length; i++) {
     // 不同则前缀回退到相同的时候
     while (j > 0 && needle[j] !== needle[i]) {
-      j = next[j - 1]
+      j = next[j - 1];
     }
     // 相同则前缀加一
     if (needle[j] === needle[i]) {
-      j++
+      j++;
     }
 
-    next[i] = j
+    next[i] = j;
   }
 
-  return next
+  return next;
 }
 ```
 
-## 解决模式串回溯问题
+## 解决子串回溯问题
 
 ```ts
+// 这里主串仍然没有和子串一起移动匹配，，匹配失败子串回退，主串仅+1
 function strStr(haystack: string, needle: string): number {
-  const next = getNext(needle)
-  let j = 0 // 提到全局
+  const next = getNext(needle);
+  let j = 0;
 
   for (let i = 0; i < haystack.length; i++) {
     if (haystack[i] === needle[j]) {
       for (; j < needle.length && haystack[i + j] === needle[j]; j++) {}
 
       if (j === needle.length) {
-        return i
+        return i;
       } else {
         // 只需要在每次匹配失败时使用next数组回退就行
-        j = next[j - 1]
+        j = next[j - 1];
       }
     }
   }
 
-  return -1
+  return -1;
 }
 
 function getNext(needle: string) {
-  let next = [0]
+  let next = [0];
   // j为前缀尾部下标
-  let j = 0
+  let j = 0;
 
-  // i为后缀尾部下标，且遍历模式串
+  // i为后缀尾部下标，且遍历子串
   for (let i = 1; i < needle.length; i++) {
     // 不同则前缀回退到相同的时候
     while (j > 0 && needle[j] !== needle[i]) {
-      j = next[j - 1]
+      j = next[j - 1];
     }
     // 相同则前缀加一
     if (needle[j] === needle[i]) {
-      j++
+      j++;
     }
 
-    next[i] = j
+    next[i] = j;
   }
 
-  return next
+  return next;
 }
 ```
 
-## 解决文本串回溯问题
+## 解决主串回溯问题
 
 ```ts
+// 这里主串和子串一起移动匹配，匹配失败子串回退，主串相当于加了部分子串+1，相当于没回退
 function strStr(haystack: string, needle: string): number {
-  const next = getNext(needle)
-  let j = 0
+  const next = getNext(needle);
+  let j = 0;
 
   for (let i = 0; i < haystack.length; i++) {
     while (j > 0 && haystack[i] !== needle[j]) {
-      j = next[j - 1]
+      j = next[j - 1];
     }
 
     if (haystack[i] === needle[j]) {
-      j++
+      j++;
     }
 
     if (j === needle.length) {
-      return i - (j - 1)
+      return i - (j - 1);
     }
   }
 
-  return -1
+  return -1;
 }
 
 function getNext(needle: string) {
-  let next = [0]
+  let next = [0];
   // j为前缀尾部下标
-  let j = 0
+  let j = 0;
 
-  // i为后缀尾部下标，且遍历模式串
+  // i为后缀尾部下标，且遍历子串
   for (let i = 1; i < needle.length; i++) {
     // 不同则前缀回退到相同的时候
     while (j > 0 && needle[j] !== needle[i]) {
-      j = next[j - 1]
+      j = next[j - 1];
     }
     // 相同则前缀加一
     if (needle[j] === needle[i]) {
-      j++
+      j++;
     }
 
-    next[i] = j
+    next[i] = j;
   }
 
-  return next
+  return next;
 }
 ```
