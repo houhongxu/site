@@ -4,7 +4,7 @@
 
 但是，umd 老当益壮，还是很常用的，像组件库常用产物就是 umd/cjs/es
 
-我最近写的包[remote-module]()也用到了 umd，还是需要重温一遍
+我最近写的包[remote-module](https://www.npmjs.com/package/remote-module)也用到了 umd，还是需要重温一遍
 
 ## umd 的结构
 
