@@ -35,6 +35,12 @@ umd 逻辑就是很简单的 if else 语句，共四种情况，依次判断
 - 第三种情况，也是判断 exports，但是没有判断 module，是另一种 cjs 导出，使用 exports["remote-module"] 具名导出
 - 第四种情况，则直接挂在 root["remote-module"]，也就是挂 window 上
 
+其实很多情况下都是第四种情况，因为 cjs 往往是直接在 node 导入使用的
+
+所以 umd 其实大多替代了 iife 立即执行函数的工作
+
+那么 umd 可能还会继续发光发热很久
+
 ## 从 umd 中取值
 
 最近用到的场景就是，远程加载 umd 文件后，获取到了 umd 字符串
