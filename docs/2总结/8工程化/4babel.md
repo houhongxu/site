@@ -34,6 +34,8 @@ babel 的流程可以分为三部分
 
 他会比 标准 estree 多一些属性，如果想获取 标准 estree 可以使用 acorn
 
+对了，@babel/parser 本身就是重度参考 acorn
+
 #### 常见属性名词
 
 - Program 程序 顾名思义，整个代码都是
@@ -59,8 +61,6 @@ babel 的流程可以分为三部分
 - ExportAllDeclaration -> ExportNamedDeclaration
 
 #### 解析流程
-
-对了，@babel/parser 本身就是重度参考 acorn
 
 解析过程分为两步
 
