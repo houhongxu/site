@@ -278,7 +278,7 @@ console.log(JSON.stringify(babelAst, null, 2));
     "interpreter": null,
     "body": [
       {
-        "type": "VariableDeclaration", // 声明 const
+        "type": "VariableDeclaration", // 声明 const a=1
         "start": 0,
         "end": 11,
         "loc": {
@@ -295,7 +295,7 @@ console.log(JSON.stringify(babelAst, null, 2));
         },
         "declarations": [
           {
-            "type": "VariableDeclarator", // 声明 第一个，应该是因为声明可以用,隔开多个，所以是数组
+            "type": "VariableDeclarator", // 声明 第一个 a=1，应该是因为声明可以用,隔开多个，所以是数组
             "start": 6,
             "end": 11,
             "loc": {
@@ -365,8 +365,90 @@ console.log(JSON.stringify(babelAst, null, 2));
 
 ### @babel/traverse
 
+像用上面的例子的 ast，遍历节点顺序就是如下
+
+其中 enter 和 exit 就是进入 Node 时和退出 Node 时
+
+path 可以访问当前 Node，父 Node 等属性，链接了整个路径，也可以修改 Node
+
+state 可以传递参数
+
+```js
+import { parse } from "@babel/parser";
+import traverse from "@babel/traverse";
+
+const jsCodeString = "const a = 1";
+
+const babelAst = parse(jsCodeString, { tokens: true });
+
+traverse(
+  babelAst,
+  {
+    enter(path, state) {
+      console.log("enter", path.node.type, state);
+      state.count++;
+    },
+    exit(path, state) {
+      console.log("exit", path.node.type, state);
+    },
+    "Identifier|NumericLiteral"(path) {
+      console.log("Identifier|NumericLiteral", path.node.type);
+    },
+  },
+  undefined,
+  { count: 1 }
+);
+
+
+enter Program
+enter VariableDeclaration
+enter VariableDeclarator
+enter Identifier
+Identifier|NumericLiteral Identifier
+exit Identifier
+enter NumericLiteral
+Identifier|NumericLiteral NumericLiteral
+exit NumericLiteral
+exit VariableDeclarator
+exit VariableDeclaration
+exit Program
+```
+
 ### @babel/generator
 
-#### sourcemap
+最后将处理完的 ast 转成 code，顺带生成 sourcemap
+
+```
+import { parse } from "@babel/parser";
+import traverse from "@babel/traverse";
+import generate from "@babel/generator";
+
+const jsCodeString = "const a = 1";
+
+const babelAst = parse(jsCodeString, { tokens: true });
+
+traverse(babelAst, {
+  NumericLiteral(path) {
+    path.node.value = 2;
+  },
+});
+
+const result = generate(babelAst, { sourceMaps: true });
+
+console.log(result.code, result.map);
+
+const a = 2; {
+  version: 3,
+  file: undefined,
+  names: [ 'a' ],
+  sourceRoot: undefined,
+  sources: [ 'a.js' ],
+  sourcesContent: [ null ],
+  mappings: 'AAAA,MAAMA,CAAC,GAAG,CAAC',
+  ignoreList: []
+}
+```
 
 ### plugin/preset
+
+插件
