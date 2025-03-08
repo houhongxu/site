@@ -34,7 +34,7 @@ babel 的流程可以分为三部分
 
 他会比 标准 estree 多一些属性，如果想获取 标准 estree 可以使用 acorn
 
-对了，@babel/parser 本身就是重度参考 acorn
+对了，@babel/parser 本身就是重度参考 acorn，fork 并改造的 babylon
 
 #### 常见属性名词
 
@@ -418,6 +418,8 @@ exit Program
 
 最后将处理完的 ast 转成 code，顺带生成 sourcemap
 
+sourcemap 就是可以将错误定位到源码的文件
+
 ```
 import { parse } from "@babel/parser";
 import traverse from "@babel/traverse";
@@ -438,13 +440,13 @@ const result = generate(babelAst, { sourceMaps: true });
 console.log(result.code, result.map);
 
 const a = 2; {
-  version: 3,
-  file: undefined,
-  names: [ 'a' ],
-  sourceRoot: undefined,
-  sources: [ 'a.js' ],
+  version: 3, // sourcemap版本
+  file: undefined, // 转换后文件名
+  names: [ 'a' ], // 转换前的所有变量
+  sourceRoot: undefined, // 转换前的文件目录
+  sources: [ 'a.js' ], // 转换前的文件名
   sourcesContent: [ null ],
-  mappings: 'AAAA,MAAMA,CAAC,GAAG,CAAC',
+  mappings: 'AAAA,MAAMA,CAAC,GAAG,CAAC', //  VLQ 编码映射行列
   ignoreList: []
 }
 ```
@@ -452,3 +454,50 @@ const a = 2; {
 ### plugin/preset
 
 插件
+
+babel 插件有两种格式，直接是配置对象或者是一个返回配置对象的函数都可以
+
+我们就用函数来写一个去除 console.log 的插件
+
+如果想接受参数，插件内可以用 state.opts 读取到
+
+```js
+import { PluginObj, transform } from "@babel/core";
+
+// 参数就是@babel/core的导出
+function BabelPluginLog(babel: any): PluginObj {
+  return {
+    name: "remove-console",
+    visitor: {
+      CallExpression(path, state) {
+        const callee = path.node.callee;
+
+        console.log(state.opts);
+
+        if (
+          callee.type === "MemberExpression" &&
+          callee.object.type === "Identifier" &&
+          callee.object.name === "console" &&
+          callee.property.type === "Identifier" &&
+          callee.property.name === "log"
+        ) {
+          path.remove();
+        }
+      },
+    },
+  };
+}
+
+const jsCodeString = "const a = 1;console.log(1)";
+
+const result = transform(jsCodeString, {
+  plugins: [[BabelPluginLog, { option1: true }]],
+});
+
+console.log(result?.code);
+
+{
+  option1: true;
+}
+const a = 1;
+```
