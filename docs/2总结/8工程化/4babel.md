@@ -459,15 +459,20 @@ babel 插件有两种格式，直接是配置对象或者是一个返回配置�
 
 我们就用函数来写一个去除 console.log 的插件
 
-如果想接受参数，插件内可以用 state.opts 读取到
+如果要 ts 类型的话，需要使用`@babel/helper-plugin-utils`这个包
+
+如果想接受用户参数，可以通过插件第二个参数，也可以插件内可以用 state.opts 读取到
 
 ```js
-import { PluginObj, transform } from "@babel/core";
+import { PluginItem, transform } from "@babel/core";
+import { declare } from "@babel/helper-plugin-utils";
 
-// 参数就是@babel/core的导出
-function BabelPluginLog(babel: any): PluginObj {
+const BabelPluginLog = declare((api, options, dirname) => {
+  console.log(Object.keys(api), options, dirname);
+
   return {
     name: "remove-console",
+    pre(state) {},
     visitor: {
       CallExpression(path, state) {
         const callee = path.node.callee;
@@ -485,19 +490,53 @@ function BabelPluginLog(babel: any): PluginObj {
         }
       },
     },
+    post(state) {},
   };
-}
+});
+
+type Params = Parameters<ReturnType<typeof declare>>;
+
+const BabelPresetsLog: (...args: Params) => { plugins: PluginItem[] } = (
+  api,
+  options,
+  dirname
+) => ({
+  plugins: [[BabelPluginLog, options?.logOptions]],
+});
 
 const jsCodeString = "const a = 1;console.log(1)";
 
 const result = transform(jsCodeString, {
-  plugins: [[BabelPluginLog, { option1: true }]],
+  presets: [[BabelPresetsLog, { logOptions: { option1: true } }]],
+  // plugins: [[BabelPluginLog, { option1: true }]],
 });
 
 console.log(result?.code);
 
-{
-  option1: true;
-}
+
+[
+  'DEFAULT_EXTENSIONS',    'File',
+  'buildExternalHelpers',  'createConfigItem',
+  'createConfigItemAsync', 'createConfigItemSync',
+  'getEnv',                'loadOptions',
+  'loadOptionsAsync',      'loadOptionsSync',
+  'loadPartialConfig',     'loadPartialConfigAsync',
+  'loadPartialConfigSync', 'parse',
+  'parseAsync',            'parseSync',
+  'resolvePlugin',         'resolvePreset',
+  'template',              'tokTypes',
+  'transform',             'transformAsync',
+  'transformFile',         'transformFileAsync',
+  'transformFileSync',     'transformFromAst',
+  'transformFromAstAsync', 'transformFromAstSync',
+  'transformSync',         'traverse',
+  'types',                 'version',
+  'OptionManager',         'Plugin',
+  'cache',                 'env',
+  'async',                 'caller',
+  'assertVersion',         'targets',
+  'addExternalDependency', 'assumption'
+] { option1: true } /Users/houhongxu/workspace/hhx/book/babel
+{ option1: true }
 const a = 1;
 ```
