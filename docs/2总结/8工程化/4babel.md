@@ -459,7 +459,9 @@ babel 插件有两种格式，直接是配置对象或者是一个返回配置�
 
 我们就用函数来写一个去除 console.log 的插件
 
-如果要 ts 类型的话，需要使用`@babel/helper-plugin-utils`这个包
+因为函数的参数比较方便，第一个参数 api 就是@babel/core 的默认导出，第二个参数就是用户参数，第三个就是执行路径
+
+如果要 ts 类型的话，需要使用@babel/helper-plugin-utils 这个包
 
 如果想接受用户参数，可以通过插件第二个参数，也可以插件内可以用 state.opts 读取到
 
