@@ -465,6 +465,8 @@ babel 插件有两种格式，直接是配置对象或者是一个返回配置�
 
 如果想接受用户参数，可以通过插件第二个参数，也可以插件内可以用 state.opts 读取到
 
+preset 更简单了，就是一个带有 plugins 属性的对象，用于官方集合多个插件减少用户配置复杂度
+
 ```js
 import { PluginItem, transform } from "@babel/core";
 import { declare } from "@babel/helper-plugin-utils";
@@ -542,3 +544,608 @@ console.log(result?.code);
 { option1: true }
 const a = 1;
 ```
+
+## 源码简读
+
+### @babel/parser
+
+先看包的具名导出函数 parse
+
+unambiguous 情况先不看
+
+通过 getParser 获取 parser 实例然后执行 parse 函数
+
+```js
+export function parse(input: string, options?: Options): File {
+  //// unambiguous情况先不看
+  if (options?.sourceType === "unambiguous") {
+  } else {
+    //// 通过getParser获取parser实例然后执行parse函数
+    return getParser(options, input).parse();
+  }
+}
+```
+
+getParser 函数就是获取 Parser 类实例
+
+先指定默认类
+
+然后根据插件获取一个新的含插件的类
+
+最后返回 new 这个类的实例
+
+```js
+function getParser(options: Options | undefined | null, input: string): Parser {
+  //// 获取默认的Parser类
+  let cls = Parser;
+
+  const pluginsMap: PluginsMap = new Map();
+
+  //// 如果有插件，插件处理后获取新的Parser类
+  if (options?.plugins) {
+    for (const plugin of options.plugins) {
+      let name, opts;
+      if (typeof plugin === "string") {
+        name = plugin;
+      } else {
+        [name, opts] = plugin;
+      }
+      if (!pluginsMap.has(name)) {
+        pluginsMap.set(name, opts || {});
+      }
+    }
+    validatePlugins(pluginsMap);
+    cls = getParserClass(pluginsMap);
+  }
+
+  //// 返回Parser类实例
+  return new cls(options, input, pluginsMap);
+}
+```
+
+Parser 实例比较复杂，extends 链路比较长
+
+Parser->StatementParser->ExpressionParser->LValParser->NodeUtils->UtilParser->Tokenizer->CommentsParser->BaseParser
+
+我们主要看 nextToken 和 parseTopLevel
+
+即对应了词法分析和语法分析阶段
+
+```js
+
+//// 继承链路Parser->StatementParser->ExpressionParser->LValParser->NodeUtils->UtilParser->Tokenizer->CommentsParser->BaseParser
+export default class Parser extends StatementParser {
+  // Forward-declaration so typescript plugin can override jsx plugin
+  // todo(flow->ts) - this probably can be removed
+  // abstract jsxParseOpeningElementAfterName(
+  //   node: N.JSXOpeningElement,
+  // ): N.JSXOpeningElement;
+
+  constructor(
+    options: Options | undefined | null,
+    input: string,
+    pluginsMap: PluginsMap,
+  ) {
+    options = getOptions(options);
+    super(options, input);
+
+    this.options = options;
+    this.initializeScopes();
+    this.plugins = pluginsMap;
+    this.filename = options.sourceFilename;
+  }
+
+  // This can be overwritten, for example, by the TypeScript plugin.
+  getScopeHandler(): new (...args: any) => ScopeHandler {
+    return ScopeHandler;
+  }
+
+  //// 核心的parse函数
+  parse(): N.File {
+    //// UtilParser 进入初始上下文
+    this.enterInitialScopes();
+
+    //// NodeUtils 新建结果对象
+    const file = this.startNode<N.File>();
+
+    //// NodeUtils 新建程序节点对象
+    const program = this.startNode<N.Program>();
+
+    //// Tokenizer 获取当前token并处理下一个token js->token
+    this.nextToken();
+
+    file.errors = null;
+
+    //// StatementParser 从最外层开始解析ast token->ast
+    this.parseTopLevel(file, program);
+
+    file.errors = this.state.errors;
+
+    file.comments.length = this.state.commentsLen;
+
+    //// 返回结果对象
+    return file as N.File;
+  }
+}
+
+```
+
+词法分析
+
+主要就是通过 getTokenFromCode 来将 jscode 解析为 token
+
+getTokenFromCode 就是通过 switch 来根据字符的 unicode 即 charCode 来创建 token
+
+```js
+
+export default abstract class Tokenizer extends CommentsParser {
+  // ...
+
+  // Read a single token, updating the parser object's token-related properties.
+  nextToken(): void {
+    this.skipSpace();
+
+    this.state.start = this.state.pos;
+
+    if (!this.isLookahead) this.state.startLoc = this.state.curPosition();
+
+    //// 读取的位置到最后则结束token解析
+    if (this.state.pos >= this.length) {
+      this.finishToken(tt.eof);
+      return;
+    }
+
+    //// 从jscode解析token
+    this.getTokenFromCode(this.codePointAtPos(this.state.pos));
+  }
+
+
+  //// jscode->token
+  getTokenFromCode(code: number): void {
+    /// 通过switch来根据字符的unicode即charCode来创建token
+    switch (code) {
+      // The interpretation of a dot depends on whether it is followed
+      // by a digit or another two dots.
+
+      case charCodes.dot:
+        this.readToken_dot();
+        return;
+      // Punctuation tokens.
+      case charCodes.leftParenthesis:
+        ++this.state.pos;
+        this.finishToken(tt.parenL);
+        return;
+
+      // ...
+
+      default:
+      if (isIdentifierStart(code)) {
+        this.readWord(code);
+        return;
+      }
+    }
+  }
+
+
+  //// 创建dot的token
+  readToken_dot(): void {
+    const next = this.input.charCodeAt(this.state.pos + 1);
+    if (next >= charCodes.digit0 && next <= charCodes.digit9) {
+      this.readNumber(true);
+      return;
+    }
+
+    if (
+      next === charCodes.dot &&
+      this.input.charCodeAt(this.state.pos + 2) === charCodes.dot
+    ) {
+      this.state.pos += 3;
+      this.finishToken(tt.ellipsis);
+    } else {
+      ++this.state.pos;
+      this.finishToken(tt.dot);
+    }
+  }
+
+}
+
+//// token映射
+export const tt = {
+  // ...
+
+  dot: createToken("."),
+
+  // ...
+}
+```
+
+语法分析
+
+parseTopLevel 先解析最外层来给返回结果 file 对象赋值
+
+主要属性是 program，所以先只看 parseProgram
+
+然后 parseProgram 解析 program 的 ast 对象，主要属性是 body 数组
+
+parseBlockBody 初始化 body 数组
+
+parseBlockOrModuleBlockBody 循环解析每一部分代码为 ast 并压入 body 数组
+
+解析 ast 主要看 parseStatementListItem 中的 parseStatementLike 中的 parseStatementContent
+
+是根据 token 的 type 进行 switch，来生成对应的 ast 对象
+
+和生成 token 时相似
+
+```js
+
+export default abstract class StatementParser extends ExpressionParser {
+  // ### Statement parsing
+
+  // Parse a program. Initializes the parser, reads any number of
+  // statements, and wraps them in a Program node.  Optionally takes a
+  // `program` argument.  If present, the statements will be appended
+  // to its body instead of creating a new node.
+
+  //// 解析最外层
+  parseTopLevel(
+    this: Parser,
+    file: Undone<N.File>,
+    program: Undone<N.Program>,
+  ): N.File {
+    //// 解析program对象到结果中
+    file.program = this.parseProgram(program);
+
+    //// 解析注释对象到结果中
+    file.comments = this.comments;
+
+    //// 添加tokens数组到结果中
+    if (this.options.tokens) {
+      file.tokens = babel7CompatTokens(this.tokens, this.input);
+    }
+
+    return this.finishNode(file, "File");
+  }
+
+
+  //// 解析program ast 对象
+  parseProgram(
+    this: Parser,
+    program: Undone<N.Program>,
+    end: TokenType = tt.eof,
+    sourceType: SourceType = this.options.sourceType,
+  ): N.Program {
+    program.sourceType = sourceType;
+
+    program.interpreter = this.parseInterpreterDirective();
+
+    //// 解析body对象
+    this.parseBlockBody(program, true, true, end);
+
+    // ...
+
+    return finishedProgram;
+  }
+
+
+  //// 解析body对象
+  parseBlockBody(
+    this: Parser,
+    node: Undone<N.BlockStatementLike>,
+    allowDirectives: boolean | undefined | null,
+    topLevel: boolean,
+    end: TokenType,
+    afterBlockParse?: (hasStrictModeDirective: boolean) => void,
+  ): void {
+    //// body 数组，每部分代码都是其中的item
+    const body: N.BlockStatementLike["body"] = (node.body = []);
+
+    const directives: N.BlockStatementLike["directives"] = (node.directives =
+      []);
+
+    //// 解析代码为ast并压入body数组
+    this.parseBlockOrModuleBlockBody(
+      body,
+      allowDirectives ? directives : undefined,
+      topLevel,
+      end,
+      afterBlockParse,
+    );
+  }
+
+  //// 解析代码为ast并压入body数组
+  // Undefined directives means that directives are not allowed.
+  // https://tc39.es/ecma262/#prod-Block
+  // https://tc39.es/ecma262/#prod-ModuleBody
+  parseBlockOrModuleBlockBody(
+    this: Parser,
+    body: N.Statement[],
+    directives: N.Directive[] | undefined | null,
+    topLevel: boolean,
+    end: TokenType,
+    afterBlockParse?: (hasStrictModeDirective: boolean) => void,
+  ): void {
+    const oldStrict = this.state.strict;
+    let hasStrictModeDirective = false;
+    let parsedNonDirective = false;
+
+    //// 循环解析每一部分代码
+    while (!this.match(end)) {
+      //// 根据是否在顶层区分解析函数
+      const stmt = topLevel
+        ? this.parseModuleItem()
+        : this.parseStatementListItem();
+
+      if (directives && !parsedNonDirective) {
+        if (this.isValidDirective(stmt)) {
+          const directive = this.stmtToDirective(stmt);
+          directives.push(directive);
+
+          if (
+            !hasStrictModeDirective &&
+            directive.value.value === "use strict"
+          ) {
+            hasStrictModeDirective = true;
+            this.setStrict(true);
+          }
+
+          continue;
+        }
+        parsedNonDirective = true;
+        // clear strict errors since the strict mode will not change within the block
+        this.state.strictErrors.clear();
+      }
+
+      //// 将解析的ast push到body数组
+      body.push(stmt);
+    }
+
+    afterBlockParse?.call(this, hasStrictModeDirective);
+
+    if (!oldStrict) {
+      this.setStrict(false);
+    }
+
+    this.next();
+  }
+
+
+  //// 代码块内解析函数
+  // https://tc39.es/ecma262/#prod-StatementListItem
+  parseStatementListItem(this: Parser) {
+    return this.parseStatementLike(
+      ParseStatementFlag.AllowDeclaration |
+        ParseStatementFlag.AllowFunctionDeclaration |
+        (!this.options.annexB || this.state.strict
+          ? 0
+          : ParseStatementFlag.AllowLabeledFunction),
+    );
+  }
+
+
+  //// 代码块内解析函数
+  // ImportDeclaration and ExportDeclaration are also handled here so we can throw recoverable errors
+  // when they are not at the top level
+  parseStatementLike(
+    this: Parser,
+    flags: ParseStatementFlag,
+  ):
+    | N.Statement
+    | N.Declaration
+    | N.ImportDeclaration
+    | N.ExportDefaultDeclaration
+    | N.ExportNamedDeclaration
+    | N.ExportAllDeclaration {
+    let decorators: N.Decorator[] | null = null;
+
+    if (this.match(tt.at)) {
+      decorators = this.parseDecorators(true);
+    }
+
+    //// 返回解析的ast
+    return this.parseStatementContent(flags, decorators);
+  }
+
+
+  //// 根据token解析ast
+  parseStatementContent(
+    this: Parser,
+    flags: ParseStatementFlag,
+    decorators?: N.Decorator[] | null,
+  ): N.Statement {
+    //// type就是token里的type
+    const startType = this.state.type;
+    const node = this.startNode();
+    const allowDeclaration = !!(flags & ParseStatementFlag.AllowDeclaration);
+    const allowFunctionDeclaration = !!(
+      flags & ParseStatementFlag.AllowFunctionDeclaration
+    );
+    const topLevel = flags & ParseStatementFlag.AllowImportExport;
+
+    // Most types of statements are recognized by the keyword they
+    // start with. Many are trivial to parse, some require a bit of
+    // complexity.
+
+    //// 通过switch token的type来生成ast
+    switch (startType) {
+      case tt._break:
+        return this.parseBreakContinueStatement(node, /* isBreak */ true);
+      case tt._continue:
+        return this.parseBreakContinueStatement(node, /* isBreak */ false);
+
+      // ...
+
+      default: {
+        if (this.isAsyncFunction()) {
+          if (!allowDeclaration) {
+            this.raise(
+              Errors.AsyncFunctionInSingleStatementContext,
+              this.state.startLoc,
+            );
+          }
+          this.next(); // eat 'async'
+          return this.parseFunctionStatement(
+            node as Undone<N.FunctionDeclaration>,
+            true,
+            !allowDeclaration && allowFunctionDeclaration,
+          );
+        }
+      }
+    }
+  }
+}
+```
+
+### @babel/generator
+
+先看包默认导出的函数 generate
+
+就是将格式化并赋予默认值的参数传给内部的 Printer 实例
+
+Printer 实例的 generate 会将 ast 转 code
+
+其中 map 实例也参与处理来生成 sourcemap
+
+```js
+//// 包导出的generate函数
+/**
+ * Turns an AST into code, maintaining sourcemaps, user preferences, and valid output.
+ * @param ast - the abstract syntax tree from which to generate output code.
+ * @param opts - used for specifying options for code generation.
+ * @param code - the original source code, used for source maps.
+ * @returns - an object containing the output code and source map.
+ */
+export default function generate(
+  ast: t.Node,
+  opts: GeneratorOptions = {},
+  code?: string | { [filename: string]: string }
+): GeneratorResult {
+  //// 格式化options
+  const format = normalizeOptions(code, opts);
+
+  //// 构建sourcemap
+  const map = opts.sourceMaps ? new SourceMap(opts, code) : null;
+
+  //// 构建Printer实例
+  const printer = new Printer(format, map);
+
+  //// 生成code
+  return printer.generate(ast);
+}
+```
+
+Priter 类
+
+属性`_buf` 是 babel 自定义的 Buffer 实例，处理后的字符暂时存在其中
+
+generate 会先调用 this.print 来逐字打印字符，存入`_buf`
+
+然后返回`_buf` 处理后的结果对象
+
+print 函数会根据 ast node 的 type 属性获取 printMethod，每个 printMethod 对应一个函数
+
+如 WhileStatement 就有同名函数，可以看出是逐字打印的
+
+最后会在 exactSource 中执行
+
+exactSource 是 babel 实现的更精确的 sourcemap 处理函数
+
+逻辑都是处理 sourcemap 的，反正最后都是调用 printMethod 函数
+
+```js
+class Printer {
+  constructor(format: Format, map: SourceMap) {
+    this._buf = new Buffer(map, format.indent.style[0]);
+  }
+
+  //...
+
+  //// generate函数生成新code
+  generate(ast: t.Node) {
+    //// 逐字打印
+    this.print(ast);
+
+    this._maybeAddAuxComment();
+
+    //// 返回buffer处理的结果，包括新code
+    return this._buf.get();
+  }
+
+
+  print(
+    node: t.Node | null,
+    parent?: t.Node,
+    noLineTerminatorAfter?: boolean,
+    trailingCommentsLineOffset?: number,
+    forceParens?: boolean,
+  ) {
+    if (!node) return;
+
+    //// 节点类型
+    const nodeType = node.type;
+
+    //// 根据节点类型获取打印方法，在最下方已经挂载过方法，本函数执行时肯定可以访问到
+    const printMethod =
+      this[
+        nodeType as Exclude<
+          t.Node["type"],
+          // removed
+          | "Noop"
+          // renamed
+          | t.DeprecatedAliases["type"]
+        >
+      ];
+
+    if (printMethod === undefined) {
+      throw new ReferenceError(
+        `unknown node of type ${JSON.stringify(
+          nodeType,
+        )} with constructor ${JSON.stringify(node.constructor.name)}`,
+      );
+    }
+
+    const loc = nodeType === "Program" || nodeType === "File" ? null : node.loc;
+
+    //// 处理sourcemap
+    this.exactSource(
+      loc,
+      // We must use @ts-ignore because this error appears in VSCode but not
+      // when doing a full build?
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore https://github.com/microsoft/TypeScript/issues/58468
+      printMethod.bind(this, node, parent),
+    );
+  }
+
+  exactSource(loc: Loc | undefined, cb: () => void) {
+    //// 没有loc不需要处理sourcemap，直接调用printMethod返回
+    if (!loc) {
+      cb();
+      return;
+    }
+
+    this._catchUp("start", loc);
+
+    //// 处理sourcemap后调用printMethod返回
+    this._buf.exactSource(loc, cb);
+  }
+
+  //...
+}
+
+// WhileStatement函数
+export function WhileStatement(this: Printer, node: t.WhileStatement) {
+  this.word("while");
+  this.space();
+  this.token("(");
+  this.print(node.test, node);
+  this.token(")");
+  this.printBlock(node);
+}
+
+
+```
+
+### @babel/core
+
+### 官方 preset
