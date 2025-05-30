@@ -2,10 +2,10 @@ name: deploy
 
 on:
   pull_request:
-    branches: [main]
+    branches: [master]
 
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build-and-deploy:
