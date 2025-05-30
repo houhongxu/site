@@ -1,0 +1,61 @@
+name: deploy
+
+on:
+  pull_request:
+    branches: [main]
+
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - run: pnpm i
+
+      - run: pnpm build
+
+      - uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rlgoDzvc -i"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          EXCLUDE: "/node_modules/, /.git/, /.github/"
+          SCRIPT_BEFORE: |
+            whoami
+            echo "🚀 Starting deployment..."
+            ls -al ${{ secrets.REMOTE_TARGET }}
+            # 检查 Docker 环境
+            docker --version
+            docker ps | grep site || echo "Container site not found"
+          SCRIPT_AFTER: |
+            whoami
+            echo "📦 Files deployed to staging area:"
+            ls -al ${{ secrets.REMOTE_TARGET }}
+            echo "📊 Rsync output:"
+            echo $RSYNC_STDOUT
+
+            VOLUME_PATH=$(docker volume inspect shared_volume --format '{{.Mountpoint}}')
+            echo "🐳 Deploying to Docker volume: $VOLUME_PATH"
+
+            sudo rm -rf $VOLUME_PATH/*
+            sudo cp -r ${{ secrets.REMOTE_TARGET }}/* $VOLUME_PATH/
+            sudo chown -R 101:101 $VOLUME_PATH
+            sudo chmod -R 755 $VOLUME_PATH
+
+            echo "✅ Deployment to Docker container completed!"
