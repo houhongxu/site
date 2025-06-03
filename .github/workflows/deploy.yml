@@ -48,12 +48,16 @@ jobs:
           SCRIPT_AFTER: |
             whoami
 
-            echo "📦 Files deployed to staging area: ${{ secrets.REMOTE_TARGET }}"
+            echo "📦 Files deployed to staging area"
 
             echo "📊 Rsync output:"
 
             echo $RSYNC_STDOUT
 
-            echo "🐳 Deploying to Docker volume: ${{ secrets.REMOTE_DEPLOY_PATH }}"
+            tar -xzf ${{ secrets.REMOTE_TARGET }}/site-dist.tar.gz -C ${{ secrets.REMOTE_TARGET }}
+
+            docker cp ${{ secrets.REMOTE_TARGET }}/dist/. site1:/usr/share/nginx/html/
+
+            echo "🐳 Deploying to Docker volume"
 
             echo "✅ Deployment to Docker container completed!"
