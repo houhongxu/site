@@ -40,18 +40,20 @@ jobs:
           SCRIPT_BEFORE: |
             whoami
             echo "🚀 Starting deployment..."
-            ls -al ${{ secrets.REMOTE_TARGET }}
+
             # 检查 Docker 环境
             docker --version
-            docker ps | grep site || echo "Container site not found"
+
+            docker ps
           SCRIPT_AFTER: |
             whoami
-            echo "📦 Files deployed to staging area:"
-            ls -al ${{ secrets.REMOTE_TARGET }}
+
+            echo "📦 Files deployed to staging area: ${{ secrets.REMOTE_TARGET }}"
+
             echo "📊 Rsync output:"
+
             echo $RSYNC_STDOUT
 
-            VOLUME_PATH=$(docker volume inspect shared_volume --format '{{.Mountpoint}}')
-            echo "🐳 Deploying to Docker volume: $VOLUME_PATH"
+            echo "🐳 Deploying to Docker volume: ${{ secrets.REMOTE_DEPLOY_PATH }}"
 
             echo "✅ Deployment to Docker container completed!"
