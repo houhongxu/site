@@ -56,8 +56,6 @@ jobs:
 
             tar -xzf ${{ secrets.REMOTE_TARGET }}/site-dist.tar.gz -C ${{ secrets.REMOTE_TARGET }}
 
-            docker cp ${{ secrets.REMOTE_TARGET }}/dist/. site1:/usr/share/nginx/html/
+            docker cp ${{ secrets.REMOTE_TARGET }}/dist/. ${{ secrets.REMOTE_DOCKER_CONTAINER }}:/usr/share/nginx/html/
 
-            echo "🐳 Deploying to Docker volume"
-
-            echo "✅ Deployment to Docker container completed!"
+            echo "🐳 Deployment to Docker container completed!"
