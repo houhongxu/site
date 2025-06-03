@@ -7,7 +7,7 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "zeropress": "^0.0.44"
+    "zeropress": "^0.0.45"
   },
   "packageManager": "pnpm@9.6.0"
 }
