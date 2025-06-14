@@ -36,7 +36,7 @@ jobs:
       - uses: docker/metadata-action@v5
         id: meta
         with:
-          images: ${{ secrets.DOCKER_USERNAME }}/site
+          images: registry.cn-hangzhou.aliyuncs.com/${{ secrets.DOCKER_USERNAME }}/site
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -53,5 +53,5 @@ jobs:
           cache-to: type=gha,mode=max
 
       - run: |
-          echo "🐳 Docker image pushed successfully!"
+          echo "🐳 Docker image pushed successfully to Aliyun!"
           echo "📦 Image tags: ${{ steps.meta.outputs.tags }}"
