@@ -1,0 +1,14 @@
+node_modules
+.git
+.github
+*.md
+.DS_Store
+.vscode
+pnpm-lock.yaml
+package.json
+zeropress.config.ts
+docs
+public
+TODO.md
+简历.md
+myPromise.js
