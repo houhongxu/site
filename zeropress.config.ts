@@ -2,7 +2,8 @@ import { UserConfig } from "zeropress";
 
 const config: UserConfig = {
   title: "HHX的网站",
-  description: "推荐试用ZEROPRESS部署同款网站",
+  description: "",
+  icp: "备案号：苏ICP备2025187299号-1",
   themeConfig: {
     nav: [
       {
