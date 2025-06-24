@@ -42,9 +42,13 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd docker-compose
-            # 强制删除本地镜像
+
+            docker compose down
+
             docker rmi registry.cn-hangzhou.aliyuncs.com/${{ secrets.DOCKER_USERNAME }}/site:latest || true
-            # 重新拉取和启动
+
             docker compose pull
+
             docker compose up -d
+
             echo "✅ Deployment completed!"
