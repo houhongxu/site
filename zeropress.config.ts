@@ -1,7 +1,7 @@
 import { UserConfig } from "zeropress";
 
 const config: UserConfig = {
-  title: "HHX的网站",
+  title: "Intrinsic",
   description: "",
   icp: "备案号：苏ICP备2025187299号-1",
   themeConfig: {
