@@ -1,4 +1,4 @@
-# react 原理
+# react 渲染流程
 
 react 有三个部分
 
