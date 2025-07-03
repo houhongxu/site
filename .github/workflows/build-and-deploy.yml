@@ -41,13 +41,15 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd docker-compose
+            cd site
+
+            git pull
 
             docker compose down
 
             docker rmi registry.cn-hangzhou.aliyuncs.com/${{ secrets.DOCKER_USERNAME }}/site:latest || true
 
-            docker compose pull
+            docker compose pull --no-cache
 
             docker compose up -d
 
