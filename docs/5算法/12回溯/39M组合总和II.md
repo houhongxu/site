@@ -4,11 +4,15 @@
 
 ### 思路一
 
-递归的回溯，首先排序，这样可以使用 target 一直减 current 来跳出递归，如果不排序则需要计算 sum。然后需要用 path 数组记录路径，在满足条件后收集 path 到 result
+组合，回溯
 
-注意 path 需要拷贝，以及 dfs 时 candidates 跟随遍历来 slice 避免重复
+首先排序，这样可以使用 target 一直减 current 来跳出递归，如果不排序则需要计算 sum
 
-还需要额外注意遍历时跳过重复数字
+然后需要用 path 数组记录路径，在满足条件后收集 path 到 result
+
+注意 path 需要拷贝
+
+以及 dfs 时 candidates 跟随遍历来 slice(i+1)，因为 i 时不可以重复选择 candidates[i]
 
 ### 代码
 
