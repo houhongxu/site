@@ -12,6 +12,8 @@
 
 与组合的区别是每次都收集 path，在长度最大时终止递归
 
+因为 nums 数字会重复，所以跳过重复数字
+
 ### 代码
 
 ```js
@@ -19,15 +21,20 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsets = function (nums) {
-  const res = [];
+var subsetsWithDup = function (nums) {
+  nums.sort((a, b) => a - b);
+
+  const result = [];
   const path = [];
 
   const dfs = (arr) => {
-    // 每次都收集path
-    res.push([...path]);
+    result.push([...path]);
 
     for (let i = 0; i < arr.length; i++) {
+      if (i > 0 && arr[i] === arr[i - 1]) {
+        continue;
+      }
+
       path.push(arr[i]);
       dfs(arr.slice(i + 1));
       path.pop();
@@ -36,6 +43,6 @@ var subsets = function (nums) {
 
   dfs(nums);
 
-  return res;
+  return result;
 };
 ```

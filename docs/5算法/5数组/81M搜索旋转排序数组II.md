@@ -1,4 +1,4 @@
-# 33M 搜索旋转排序数组
+# 6MZ 字形变换
 
 ## 解题思路
 
@@ -14,7 +14,7 @@
 /**
  * @param {number[]} nums
  * @param {number} target
- * @return {number}
+ * @return {boolean}
  */
 var search = function (nums, target) {
   const first = nums[0];
@@ -23,25 +23,25 @@ var search = function (nums, target) {
   if (target >= first) {
     for (let i = 0; i < nums.length; i++) {
       if (i > 0 && nums[i] < nums[i - 1]) {
-        return -1;
+        return false;
       }
 
       if (nums[i] === target) {
-        return i;
+        return true;
       }
     }
   } else {
     for (let i = nums.length - 1; i >= 0; i--) {
       if (i < nums.length - 1 && nums[i] > nums[i + 1]) {
-        return -1;
+        return false;
       }
 
       if (nums[i] === target) {
-        return i;
+        return true;
       }
     }
   }
 
-  return -1;
+  return false;
 };
 ```
