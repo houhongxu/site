@@ -72,6 +72,7 @@ jobs:
           envs: IMAGE_NAME,NAMESPACE,DEPLOYMENT,CONTAINER,GITHUB_SHA
           script: |
             set -e
+            export KUBECONFIG="$HOME/.kube/config"
             kubectl apply -f ~/site/k8s/site.yaml
             kubectl -n "$NAMESPACE" set image deployment/"$DEPLOYMENT" "$CONTAINER"="$IMAGE_NAME:$GITHUB_SHA"
             kubectl -n "$NAMESPACE" rollout status deployment/"$DEPLOYMENT" --timeout=180s
