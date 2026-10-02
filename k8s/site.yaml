@@ -45,22 +45,3 @@ spec:
     - name: http
       port: 80
       targetPort: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: site
-  namespace: prod
-spec:
-  ingressClassName: traefik
-  rules:
-    - host: zeropress.site
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: site
-                port:
-                  number: 80
