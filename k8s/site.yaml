@@ -10,6 +10,12 @@ metadata:
   namespace: prod
 spec:
   replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: site
@@ -19,7 +25,12 @@ spec:
         app: site
     spec:
       nodeSelector:
-        role: heavy-worker
+        kubernetes.io/hostname: vm-12-8-ubuntu
+      tolerations:
+        - key: node-role
+          operator: Equal
+          value: control-plane
+          effect: NoSchedule
       containers:
         - name: site
           image: ghcr.io/houhongxu/site:latest
@@ -32,6 +43,14 @@ spec:
             limits:
               cpu: "500m"
               memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 2
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
 ---
 apiVersion: v1
 kind: Service
